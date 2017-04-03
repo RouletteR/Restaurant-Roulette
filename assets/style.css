@@ -4,3 +4,12 @@
 .location{
 	width: 200px;
 }
+.btn-large{
+	background-color: rgba(0,104,55,1);
+	color: white;
+}
+
+
+.hidden{
+	display: none;
+}
