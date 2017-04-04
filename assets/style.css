@@ -1,3 +1,16 @@
+
+#map {
+    height: 100%;
+}
+
+html,
+body {
+    height: 600px;
+    width: 600px;
+    margin: 0;
+    padding: 0;
+}
+
 .nav-wrapper{
 	background-color: rgba(0,104,55,1);
 }
@@ -24,3 +37,4 @@
 .hidden{
 	display: none;
 }
+
