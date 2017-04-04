@@ -1,9 +1,23 @@
+
+#container1{
+	width:100%;
+	text-align:center;
+}
+
+
+
 .nav-wrapper{
 	background-color: rgba(0,104,55,1);
 }
 .location{
 	width: 200px;
 }
+
+.cuisine {
+	width: 200px;
+}
+
+
 .btn-large{
 	background-color: rgba(0,104,55,1);
 	color: white;

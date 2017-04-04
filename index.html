@@ -8,24 +8,51 @@
     <link rel="stylesheet" href="assets/style.css">
     <title>Restaurant Roullete</title>
 </head>
+
 <body>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo center"><img src="assets/images/rouletter-logo.svg"></a>
+    <div class="container" id="container1">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center"><img src="assets/images/rouletter-logo.svg"></a>
+        </div>
         <form>
-            <div class="input-field location">
-                <input type="search" placeholder="Town or Zip Code">
+            <div class="row">
+                <div class="input-field location">
+                    <input type="search" placeholder="Town or Zip Code">
+                </div>
+                <div class="col s3 m3 l3">
+                    <a class="dropdown-button btn" href="#" data-activates='dropdown1'>Cuisine</a>
+
+                    <ul id="dropdown1" class="dropdown-content">
+                        <!-- <li><a value="" disabled selected>Choose your cuisine</option> -->
+                        <li><a href="#!">Italian</a></li>
+                        <li><a href="#!">Mediterranean</a></li>
+                        <li><a href="#!">Chinese</a></li>
+                        <li><a href="#!">Japanese</a></li>
+                        <li><a href="#!">Mexican</a></li>
+                        <li><a href="#!">Breakfast</a></li>
+                        <li><a href="#!">BBQ</a></li>
+                        <li><a href="#!">Vegan</a></li>
+                        <li><a href="#!">Deli</a></li>
+                        <li><a href="#!">Thai</a></li>
+                        <li><a href="#!">Seafood</a></li>
+                        <li><a href="#!">American</a></li>
+                        <li><a href="#!">Drinks</a></li>
+                     </ul>
+                    
+                </div>
             </div>
         </form>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col s12">
-            <a class="waves-effect waves-light btn-large" id="spin">Spin</a>
+            <div class="col s12" id="wheel">
+                <a class="waves-effect waves-light btn-large" id="spin">Spin</a>
             </div>
         </div>
     </div>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
     <script src="assets/function.js"></script>
 </body>
 <div class="svg hidden">
@@ -535,7 +562,7 @@
             </radialGradient>
             <circle fill="url(#SVGID_12_)" cx="100" cy="58.261" r="4.664" />
         </g>
-        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="360" begin="0s" dur="3s" repeatCount="indefinite"/>
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="360" begin="0s" dur="3s" repeatCount="indefinite" />
     </svg>
 </div>
 
