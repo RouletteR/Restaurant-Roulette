@@ -1,3 +1,4 @@
+
 #map {
     height: 100%;
 }
@@ -9,3 +10,31 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.nav-wrapper{
+	background-color: rgba(0,104,55,1);
+}
+.location{
+	width: 200px;
+}
+.btn-large{
+	background-color: rgba(0,104,55,1);
+	color: white;
+}
+
+
+#layer_1{
+	padding: 20px;
+}
+.svg{
+	width:200px;
+	height:200px;
+}
+.svg-container{
+	padding: 20px;
+}
+
+.hidden{
+	display: none;
+}
+

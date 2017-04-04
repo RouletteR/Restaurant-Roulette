@@ -1,3 +1,5 @@
+$(document).ready(function() {
+
 // function initMap() {
 //     var map = new google.maps.Map(document.getElementById('map'), {
 //         center: { lat: -34.397, lng: 150.644 },
@@ -88,3 +90,16 @@ function failure() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+    // Diplays Roulette SVG
+    var rouletteSvg = $(".svg").removeClass("hidden");
+    $(".svg-container").prepend(rouletteSvg);
+
+    //Spin Wheel
+    $("#spin").on("click", function() {
+        var rotation = Math.floor(Math.random() * (1440 - 360) + 360);
+        $('.svg').velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
+    });
+});
+
