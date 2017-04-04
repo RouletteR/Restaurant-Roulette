@@ -1,4 +1,11 @@
 
+
+#container1{
+	width:100%;
+	text-align:center;
+}
+
+
 #map {
     height: 100%;
 }
@@ -17,6 +24,12 @@ body {
 .location{
 	width: 200px;
 }
+
+.cuisine {
+	width: 200px;
+}
+
+
 .btn-large{
 	background-color: rgba(0,104,55,1);
 	color: white;

@@ -94,6 +94,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
     // Diplays Roulette SVG
     var rouletteSvg = $(".svg").removeClass("hidden");
+
+    $("#wheel").prepend(rouletteSvg);
+
+    $('.dropdown-button').dropdown('open');
     $(".svg-container").prepend(rouletteSvg);
 
     //Spin Wheel
