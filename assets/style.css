@@ -10,6 +10,17 @@
 }
 
 
+#layer_1{
+	padding: 20px;
+}
+.svg{
+	width:200px;
+	height:200px;
+}
+.svg-container{
+	padding: 20px;
+}
+
 .hidden{
 	display: none;
 }
