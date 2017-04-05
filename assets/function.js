@@ -69,27 +69,27 @@ $(document).ready(function() {
 
 
 
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch(request, function(results, status) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
-                var place = results[i];
+    // var service = new google.maps.places.PlacesService(map);
+    // service.nearbySearch(request, function(results, status) {
+    //     if (status == google.maps.places.PlacesServiceStatus.OK) {
+    //         for (var i = 0; i < results.length; i++) {
+    //             var place = results[i];
 
-                var markerResults = new google.maps.Marker({
-                    map: map,
-                    position: place.geometry.location
-                });
+    //             var markerResults = new google.maps.Marker({
+    //                 map: map,
+    //                 position: place.geometry.location
+    //             });
 
-            }
-        }
-    });
+    //         }
+    //     }
+    // });
 
 
     function failure() {
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+    // google.maps.event.addDomListener(window, 'load', initialize);
 
 //ROULETTE WHEEL
 
@@ -106,4 +106,11 @@ $(document).ready(function() {
         var rotation = Math.floor(Math.random() * (1440 - 360) + 360);
         $('.svg').velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
     });
+
+// YELP API
+var term = $(".dropdown-content").val();
+var userLocation = $(".location").val();
+var userLat;
+var userLong;
+var queryURL = "https://api.yelp.com/v2/search?" + term + "=food&location=" + userLocation; //+ "&ll=" + userLat + "," + userLong;
 });
