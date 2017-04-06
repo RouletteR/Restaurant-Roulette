@@ -2,9 +2,8 @@
 
 #container1{
 	width:100%;
-	text-align:center;
+	
 }
-
 
 #map {
 	margin: auto;
@@ -54,10 +53,10 @@ body {
 	display: none;
 }
 
-#topics_dropdown {
-	text-align: center;
-	width: 132px;
-	max-height: 177px;
+.dropdown-content,
+.active{
+	width: 150px;
+	padding: 5px;
 }
 
 input {
@@ -65,8 +64,8 @@ input {
 	height: 13px;
 	padding: 0;
 	margin: 0;
-	vertical-align: bottom;
-	position: relative;
+	
+
 }
 
 label {
