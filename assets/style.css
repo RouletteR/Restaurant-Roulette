@@ -7,13 +7,15 @@
 
 
 #map {
-    height: 100%;
+	margin: auto;
+	width: 100%;
+    height: 300px;
 }
 
 html,
 body {
-    height: 600px;
-    width: 600px;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
 }
@@ -40,8 +42,9 @@ body {
 	padding: 20px;
 }
 .svg{
-	width:200px;
-	height:200px;
+	margin: auto;
+	width:80%;
+	height:80%;
 }
 .svg-container{
 	padding: 20px;
