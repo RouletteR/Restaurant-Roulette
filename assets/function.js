@@ -98,13 +98,13 @@ $(document).ready(function() {
 
     $("#wheel").prepend(rouletteSvg);
 
-    $('.dropdown-button').dropdown('open');
+    $('.dropdown-button').dropdown('closed');
     $(".svg-container").prepend(rouletteSvg);
 
     //Spin Wheel
-    $("#spin").on("click", function() {
+    $(".spin").on("click", function() {
         var rotation = Math.floor(Math.random() * (1440 - 360) + 360);
-        $('.svg').velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
+        $("#Layer_1").velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
     });
 
 // YELP API
@@ -114,3 +114,5 @@ var userLat;
 var userLong;
 var queryURL = "https://api.yelp.com/v2/search?" + term + "=food&location=" + userLocation; //+ "&ll=" + userLat + "," + userLong;
 });
+
+
