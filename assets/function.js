@@ -25,6 +25,7 @@ $(document).ready(function() {
 
     x.getCurrentPosition(success, failure);
 
+
     function success(position) {
         var myLat = position.coords.latitude;
         var myLong = position.coords.longitude;
@@ -47,11 +48,11 @@ $(document).ready(function() {
 
         var marker = new google.maps.Marker({ map: map, position: coords });
 
-        var request = {
-            location: coords,
-            radius: '500'
+        // var request = {
+        //     location: coords,
+        //     radius: '500'
 
-        };
+        // };
 
         myLocation.latitude = myLat;
         myLocation.longitude = myLong;
@@ -64,7 +65,7 @@ $(document).ready(function() {
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
-    //google.maps.event.addDomListener(window, 'load', initialize);
+
 
     //ROULETTE WHEEL
 
@@ -82,43 +83,61 @@ $(document).ready(function() {
         $("#Layer_1").velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
     });
 
+   
+
+    function initialize() {
+        var latLng = new google.maps.LatLng({ location_latitude }, { location_longitude });
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: latLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+    };
+
+
+
+
+
     // FOURSQUARE API
     $(".spin").on("click", function(spin) {
 
         var queryURL = "https://api.foursquare.com/v2/venues/search?";
         var clientID = "1FJHV4PFHEKFZBZSQYSMR4HIQROYJQQWBVFJEOOYPK0VHZ4E";
         var clientSecret = "MDXKXS4BVTHR13UBMRLJ35PENUSFUDDFZXMHN2IZCDCDBVEZ";
-        var searchURL = queryURL + "categoryId=4d4b7105d754a06374d81259&ll=" + myLocation.latitude + "," + myLocation.longitude + "&client_id=" + clientID + "&client_secret=" + clientSecret + "&v=20181231" + "&limit=10";
+        var searchURL = queryURL + "categoryId=4d4b7105d754a06374d81259&ll=" + myLocation.latitude + "," + myLocation.longitude + "&client_id=" + clientID + "&client_secret=" + clientSecret + "&v=20181231" + "&limit=1000";
 
 
         $.ajax({
                 url: searchURL,
                 method: "GET",
                 dataType: "json",
-
-
-
             })
             .done(function(response) {
                 console.log(response);
                 var venues = response.response.venues;
 
+
+
+
+
                 for (i = 0; i < venues.length; i++) {
                     var location = venues[i].location.lat;
-                    var lat = venues[i].location.lat;
-                    var long = venues[i].location.lng;
+
+                    var lati = venues[i].location.lat;
+                    var longi = venues[i].location.lng;
 
                     var marker = new google.maps.Marker({
-                        setPosition: { lat: lat, long: long },
-                        setMap: map
+                        position: {lat: lati, lng: longi},
+                        map: map,
+                        label: i
                     });
-                    
+
+                    marker.setMap(map);
+
                     console.log(marker.setPosition);
 
+                    //}
                 }
-                google.maps.event.addDomListener($(".spin"), "click", function() {
-                    initialize(marker);
-                });
 
             });
 
