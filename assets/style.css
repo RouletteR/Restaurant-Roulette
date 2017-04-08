@@ -5,6 +5,10 @@
 	
 }
 
+.brand-logo {
+	margin-left: 510px;
+}
+
 #map {
 	margin: auto;
 	width: 100%;
@@ -14,6 +18,7 @@
 html,
 body {
 	background-image: url("6908618719_458251121f_o.jpg");
+	background-repeat: no-repeat;
     height: 100%;
     width: 100%;
     margin: 0;
