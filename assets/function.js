@@ -72,7 +72,7 @@ var config = {
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
-    // google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', initialize);
 
     //ROULETTE WHEEL
 
@@ -91,7 +91,7 @@ var config = {
     });
 
     // FOURSQUARE API
-    $(".spin").on("click", function() {
+    $(".spin").on("click", function(spin) {
 
         var queryURL = "https://api.foursquare.com/v2/venues/search?";
         var clientID = "1FJHV4PFHEKFZBZSQYSMR4HIQROYJQQWBVFJEOOYPK0VHZ4E";
@@ -113,16 +113,18 @@ var config = {
                 //window.eqfeed_callback = function(results) {
                     for (i = 0; i < venues.length; i++) {
                         var location = venues[i].location.lat;
-                        var latLng = google.maps.LatLng(venues[i].location.lat, venues[i].location.long);
+                        var lat = venues[i].location.lat;
+                        var long = venues[i].location.lng;
+                        
                         var marker = new google.maps.Marker({
-                            position: latLng,
+                            setPosition: {lat : lat, long : long},
                             map: map
                         });
 
-                        console.log(location);
+                        console.log(marker.setPosition);
                     //}
                 }
-
+                google.maps.event.addDomListener(window, 'load', initialize);
 
             });
 
