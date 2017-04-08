@@ -1,4 +1,26 @@
+
+
+
+
+
+
+
+
 $(document).ready(function() {
+
+var config = {
+    apiKey: "AIzaSyCsDQwdx7-Xef36ZuB8RR8muiQhL0TMTEE",
+    authDomain: "restaurant-roulette-e48d8.firebaseapp.com",
+    databaseURL: "https://restaurant-roulette-e48d8.firebaseio.com",
+    projectId: "restaurant-roulette-e48d8",
+    storageBucket: "restaurant-roulette-e48d8.appspot.com",
+    messagingSenderId: "559745798878"
+  };
+  firebase.initializeApp(config);
+
+
+
+	
     var map;
     var venues = {};
     var myLocation = {
@@ -74,7 +96,7 @@ $(document).ready(function() {
         var queryURL = "https://api.foursquare.com/v2/venues/search?";
         var clientID = "1FJHV4PFHEKFZBZSQYSMR4HIQROYJQQWBVFJEOOYPK0VHZ4E";
         var clientSecret = "MDXKXS4BVTHR13UBMRLJ35PENUSFUDDFZXMHN2IZCDCDBVEZ";
-        var searchURL = queryURL + "categoryId=4d4b7105d754a06374d81259&ll=" + myLocation.latitude + "," + myLocation.longitude + "&client_id=" + clientID + "&client_secret=" + clientSecret + "&v=20181231";
+        var searchURL = queryURL + "categoryId=4d4b7105d754a06374d81259&ll=" + myLocation.latitude + "," + myLocation.longitude + "&client_id=" + clientID + "&client_secret=" + clientSecret + "&v=20181231" + "&limit=10";
 
 
         $.ajax({
