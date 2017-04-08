@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    var map;
     var venues = {};
     var myLocation = {
         latitude: 0,
@@ -26,7 +27,7 @@ $(document).ready(function() {
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
         // Create a marker
 
@@ -70,10 +71,10 @@ $(document).ready(function() {
     // FOURSQUARE API
     $(".spin").on("click", function() {
 
-        var queryURL = "https://api.foursquare.com/v2/venues/search?ll=";
+        var queryURL = "https://api.foursquare.com/v2/venues/search?";
         var clientID = "1FJHV4PFHEKFZBZSQYSMR4HIQROYJQQWBVFJEOOYPK0VHZ4E";
         var clientSecret = "MDXKXS4BVTHR13UBMRLJ35PENUSFUDDFZXMHN2IZCDCDBVEZ";
-        var searchURL = queryURL + myLocation.latitude + "," + myLocation.longitude + "&client_id=" + clientID + "&client_secret=" + clientSecret + "&v=20181231";
+        var searchURL = queryURL + "categoryId=4d4b7105d754a06374d81259&ll=" + myLocation.latitude + "," + myLocation.longitude + "&client_id=" + clientID + "&client_secret=" + clientSecret + "&v=20181231";
 
 
         $.ajax({
@@ -87,10 +88,17 @@ $(document).ready(function() {
             .done(function(response) {
                 console.log(response);
                 var venues = response.response.venues;
-                for (i=0; i < venues.length; i++){
-                    var location = venues[i].location.labeledLatLngs;
-                    console.log(location);
+                //window.eqfeed_callback = function(results) {
+                    for (i = 0; i < venues.length; i++) {
+                        var location = venues[i].location.lat;
+                        var latLng = google.maps.LatLng(venues[i].location.lat, venues[i].location.long);
+                        var marker = new google.maps.Marker({
+                            position: latLng,
+                            map: map
+                        });
 
+                        console.log(location);
+                    //}
                 }
 
 
