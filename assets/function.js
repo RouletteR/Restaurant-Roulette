@@ -1,26 +1,18 @@
-
-
-
-
-
-
-
-
 $(document).ready(function() {
 
-var config = {
-    apiKey: "AIzaSyCsDQwdx7-Xef36ZuB8RR8muiQhL0TMTEE",
-    authDomain: "restaurant-roulette-e48d8.firebaseapp.com",
-    databaseURL: "https://restaurant-roulette-e48d8.firebaseio.com",
-    projectId: "restaurant-roulette-e48d8",
-    storageBucket: "restaurant-roulette-e48d8.appspot.com",
-    messagingSenderId: "559745798878"
-  };
-  firebase.initializeApp(config);
+    var config = {
+        apiKey: "AIzaSyCsDQwdx7-Xef36ZuB8RR8muiQhL0TMTEE",
+        authDomain: "restaurant-roulette-e48d8.firebaseapp.com",
+        databaseURL: "https://restaurant-roulette-e48d8.firebaseio.com",
+        projectId: "restaurant-roulette-e48d8",
+        storageBucket: "restaurant-roulette-e48d8.appspot.com",
+        messagingSenderId: "559745798878"
+    };
+    firebase.initializeApp(config);
 
 
 
-	
+
     var map;
     var venues = {};
     var myLocation = {
@@ -72,7 +64,7 @@ var config = {
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+    //google.maps.event.addDomListener(window, 'load', initialize);
 
     //ROULETTE WHEEL
 
@@ -110,21 +102,23 @@ var config = {
             .done(function(response) {
                 console.log(response);
                 var venues = response.response.venues;
-                //window.eqfeed_callback = function(results) {
-                    for (i = 0; i < venues.length; i++) {
-                        var location = venues[i].location.lat;
-                        var lat = venues[i].location.lat;
-                        var long = venues[i].location.lng;
-                        
-                        var marker = new google.maps.Marker({
-                            setPosition: {lat : lat, long : long},
-                            map: map
-                        });
 
-                        console.log(marker.setPosition);
-                    //}
+                for (i = 0; i < venues.length; i++) {
+                    var location = venues[i].location.lat;
+                    var lat = venues[i].location.lat;
+                    var long = venues[i].location.lng;
+
+                    var marker = new google.maps.Marker({
+                        setPosition: { lat: lat, long: long },
+                        setMap: map
+                    });
+                    
+                    console.log(marker.setPosition);
+
                 }
-                google.maps.event.addDomListener(window, 'load', initialize);
+                google.maps.event.addDomListener($(".spin"), "click", function() {
+                    initialize(marker);
+                });
 
             });
 
