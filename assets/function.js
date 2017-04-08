@@ -67,10 +67,6 @@ $(document).ready(function() {
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
-
-
-    //ROULETTE WHEEL
-
     // Diplays Roulette SVG
     var rouletteSvg = $(".svg").removeClass("hidden");
 
