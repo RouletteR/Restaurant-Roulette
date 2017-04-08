@@ -11,6 +11,7 @@ $(document).ready(function() {
 
     x.getCurrentPosition(success, failure);
 
+
     function success(position) {
         var myLat = position.coords.latitude;
         var myLong = position.coords.longitude;
@@ -52,21 +53,7 @@ $(document).ready(function() {
 
     // google.maps.event.addDomListener(window, 'load', initialize);
 
-    //ROULETTE WHEEL
-
-    // Diplays Roulette SVG
-    var rouletteSvg = $(".svg").removeClass("hidden");
-
-    $("#wheel").prepend(rouletteSvg);
-
-    $('.dropdown-button').dropdown('closed');
-    $(".svg-container").prepend(rouletteSvg);
-
-    //Spin Wheel
-    $(".spin").on("click", function() {
-        var rotation = Math.floor(Math.random() * (1440 - 360) + 360);
-        $("#Layer_1").velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
-    });
+   
 
     // FOURSQUARE API
     $(".spin").on("click", function() {
@@ -81,23 +68,20 @@ $(document).ready(function() {
                 url: searchURL,
                 method: "GET",
                 dataType: "json",
-
-
-
             })
             .done(function(response) {
                 console.log(response);
                 var venues = response.response.venues;
                 //window.eqfeed_callback = function(results) {
-                    for (i = 0; i < venues.length; i++) {
-                        var location = venues[i].location.lat;
-                        var latLng = google.maps.LatLng(venues[i].location.lat, venues[i].location.long);
-                        var marker = new google.maps.Marker({
-                            position: latLng,
-                            map: map
-                        });
+                for (i = 0; i < venues.length; i++) {
+                    var location = venues[i].location.lat;
+                    var latLng = google.maps.LatLng(venues[i].location.lat, venues[i].location.long);
+                    var marker = new google.maps.Marker({
+                        position: latLng,
+                        map: map
+                    });
 
-                        console.log(location);
+                    console.log(location);
                     //}
                 }
 
@@ -106,3 +90,19 @@ $(document).ready(function() {
 
     });
 });
+
+ //ROULETTE WHEEL
+
+    // Diplays Roulette SVG
+    var rouletteSvg = $(".svg").removeClass("hidden");
+
+    $("#wheel").prepend(rouletteSvg);
+
+    $('.dropdown-button').dropdown('closed');
+    $(".svg-container").prepend(rouletteSvg);
+
+    //Spin Wheel
+    $(".spin").on("click", function() {
+        var rotation = Math.floor(Math.random() * (1440 - 360) + 360);
+        $("#Layer_1").velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
+    });
