@@ -1,11 +1,5 @@
 
 
-
-
-
-
-
-
 $(document).ready(function() {
 
 var config = {
@@ -72,7 +66,7 @@ var config = {
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+    // google.maps.event.addDomListener(window, 'load', initialize);
 
     //ROULETTE WHEEL
 
@@ -124,7 +118,7 @@ var config = {
                         console.log(marker.setPosition);
                     //}
                 }
-                google.maps.event.addDomListener(window, 'load', initialize);
+                // google.maps.event.addDomListener(window, 'load', initialize);
 
             });
 
