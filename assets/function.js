@@ -1,36 +1,9 @@
 $(document).ready(function() {
-
-    // function initMap() {
-    //     var map = new google.maps.Map(document.getElementById('map'), {
-    //         center: { lat: -34.397, lng: 150.644 },
-    //         zoom: 6
-    //     });
-    //     var infoWindow = new google.maps.InfoWindow({ map: map });
-
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(function(position) {
-    //             var pos = {
-    //                 lat: position.coords.latitude,
-    //                 lng: position.coords.longitude
-    //             };
-
-    //             infoWindow.setPosition(pos);
-    //             infoWindow.setContent('Location found.');
-    //             map.setCenter(pos);
-    //         }, function() {
-    //             handleLocationError(true, infoWindow, map.getCenter());
-    //         });
-    //     } else {
-    //         handleLocationError(false, infoWindow, map.getCenter());
-    //     }
-    // }
-
-    // function handleLocationError(browserhasGeolocation, infoWindow, pos) {
-    //     infoWindow.setPosition(pos);
-    //     infoWindow.setContent(browserhasGeolocation ?
-    //         'Error: The Geolocation service failed.' :
-    //         'Error: Your browser doesn\'t support geolocation.');
-    // }
+    var venues = {};
+    var myLocation = {
+        latitude: 0,
+        longitude: 0
+    };
 
 
     x = navigator.geolocation;
@@ -38,12 +11,12 @@ $(document).ready(function() {
     x.getCurrentPosition(success, failure);
 
     function success(position) {
-        var mylat = position.coords.latitude;
-        var mylong = position.coords.longitude;
+        var myLat = position.coords.latitude;
+        var myLong = position.coords.longitude;
 
         // Google-API-ready latitude and longitude string
 
-        var coords = new google.maps.LatLng(mylat, mylong);
+        var coords = new google.maps.LatLng(myLat, myLong);
 
         // Setting up our Google Map
 
@@ -62,27 +35,14 @@ $(document).ready(function() {
         var request = {
             location: coords,
             radius: '500'
-                // types: ['restaurant']
+
         };
+
+        myLocation.latitude = myLat;
+        myLocation.longitude = myLong;
 
     }
 
-
-
-    // var service = new google.maps.places.PlacesService(map);
-    // service.nearbySearch(request, function(results, status) {
-    //     if (status == google.maps.places.PlacesServiceStatus.OK) {
-    //         for (var i = 0; i < results.length; i++) {
-    //             var place = results[i];
-
-    //             var markerResults = new google.maps.Marker({
-    //                 map: map,
-    //                 position: place.geometry.location
-    //             });
-
-    //         }
-    //     }
-    // });
 
 
     function failure() {
@@ -91,7 +51,7 @@ $(document).ready(function() {
 
     // google.maps.event.addDomListener(window, 'load', initialize);
 
-//ROULETTE WHEEL
+    //ROULETTE WHEEL
 
     // Diplays Roulette SVG
     var rouletteSvg = $(".svg").removeClass("hidden");
@@ -107,12 +67,34 @@ $(document).ready(function() {
         $("#Layer_1").velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
     });
 
-// YELP API
-var term = $(".dropdown-content").val();
-var userLocation = $(".location").val();
-var userLat;
-var userLong;
-var queryURL = "https://api.yelp.com/v2/search?" + term + "=food&location=" + userLocation; //+ "&ll=" + userLat + "," + userLong;
+    // FOURSQUARE API
+    $(".spin").on("click", function() {
+
+        var queryURL = "https://api.foursquare.com/v2/venues/search?ll=";
+        var clientID = "1FJHV4PFHEKFZBZSQYSMR4HIQROYJQQWBVFJEOOYPK0VHZ4E";
+        var clientSecret = "MDXKXS4BVTHR13UBMRLJ35PENUSFUDDFZXMHN2IZCDCDBVEZ";
+        var searchURL = queryURL + myLocation.latitude + "," + myLocation.longitude + "&client_id=" + clientID + "&client_secret=" + clientSecret + "&v=20181231";
+
+
+        $.ajax({
+                url: searchURL,
+                method: "GET",
+                dataType: "json",
+
+
+
+            })
+            .done(function(response) {
+                console.log(response);
+                var venues = response.response.venues;
+                for (i=0; i < venues.length; i++){
+                    var location = venues[i].location.labeledLatLngs;
+                    console.log(location);
+
+                }
+
+
+            });
+
+    });
 });
-
-

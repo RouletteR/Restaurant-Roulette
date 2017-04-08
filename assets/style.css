@@ -19,6 +19,7 @@ body {
     padding: 0;
 }
 .nav-wrapper{
+	padding: 7px;
 	background-color: rgba(0,104,55,1);
 }
 .location{
@@ -30,11 +31,6 @@ body {
 }
 
 
-.btn-flat{
-	background-color: rgba(0,104,55,1);
-	color: white;
-	float: right;
-}
 
 
 #layer_1{
