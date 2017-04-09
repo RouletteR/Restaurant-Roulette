@@ -2,9 +2,12 @@
 
 #container1{
 	width:100%;
-	text-align:center;
+	
 }
 
+.brand-logo {
+	margin-left: 510px;
+}
 
 #map {
 	margin: auto;
@@ -14,12 +17,15 @@
 
 html,
 body {
+	background-image: url("6908618719_458251121f_o.jpg");
+	background-repeat: no-repeat;
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
 }
 .nav-wrapper{
+	padding: 7px;
 	background-color: rgba(0,104,55,1);
 }
 .location{
@@ -31,11 +37,6 @@ body {
 }
 
 
-.btn-flat{
-	background-color: rgba(0,104,55,1);
-	color: white;
-	float: right;
-}
 
 
 #layer_1{
@@ -54,10 +55,10 @@ body {
 	display: none;
 }
 
-#topics_dropdown {
-	text-align: center;
-	width: 132px;
-	max-height: 177px;
+.dropdown-content,
+.active{
+	width: 150px;
+	padding: 5px;
 }
 
 input {
@@ -65,8 +66,8 @@ input {
 	height: 13px;
 	padding: 0;
 	margin: 0;
-	vertical-align: bottom;
-	position: relative;
+	
+
 }
 
 label {
