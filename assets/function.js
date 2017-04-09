@@ -2,7 +2,6 @@ $(document).ready(function() {
 
     
 
-<script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
@@ -13,7 +12,7 @@ $(document).ready(function() {
     messagingSenderId: "1096863395822"
   };
   firebase.initializeApp(config);
-</script>
+
 
     var map;
     var venues = {};
