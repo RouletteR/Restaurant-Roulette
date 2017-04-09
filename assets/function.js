@@ -1,14 +1,19 @@
 $(document).ready(function() {
 
-    var config = {
-        apiKey: "AIzaSyCsDQwdx7-Xef36ZuB8RR8muiQhL0TMTEE",
-        authDomain: "restaurant-roulette-e48d8.firebaseapp.com",
-        databaseURL: "https://restaurant-roulette-e48d8.firebaseio.com",
-        projectId: "restaurant-roulette-e48d8",
-        storageBucket: "restaurant-roulette-e48d8.appspot.com",
-        messagingSenderId: "559745798878"
-    };
-    firebase.initializeApp(config);
+    
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
+    authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
+    databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
+    projectId: "restaurantroulet-1491174705978",
+    storageBucket: "restaurantroulet-1491174705978.appspot.com",
+    messagingSenderId: "1096863395822"
+  };
+  firebase.initializeApp(config);
+</script>
 
     var map;
     var venues = {};
@@ -102,7 +107,7 @@ $(document).ready(function() {
             position: coords,
             animation: google.maps.Animation.DROP
         });
-        marker.addListener('load', toggleBounce);
+        marker.addListener('click', toggleBounce);
 
         function toggleBounce() {
             if (marker.getAnimation() !==null) {
@@ -158,7 +163,7 @@ $(document).ready(function() {
 
 
 
-    // FOURSQUARE API
+    // ZOMATO API
     $(".spin").on("click", function(spin) {
 
         var zQueryUrl  = "https://developers.zomato.com/api/v2.1/search?";
