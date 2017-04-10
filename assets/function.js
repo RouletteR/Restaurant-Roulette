@@ -1,33 +1,73 @@
 $(document).ready(function() {
 
-function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    }
-    function onFailure(error) {
-      console.log(error);
-    }
-    function renderButton() {
-      gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 240,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-      });
-    } 
 
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
-    authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
-    databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
-    projectId: "restaurantroulet-1491174705978",
-    storageBucket: "restaurantroulet-1491174705978.appspot.com",
-    messagingSenderId: "1096863395822"
-  };
-  firebase.initializeApp(config);
+    function onSuccess(googleUser) {
+        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+
+    function onFailure(error) {
+        console.log(error);
+    }
+
+    function renderButton() {
+        gapi.signin2.render('my-signin2', {
+            'scope': 'profile email',
+            'width': 240,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });
+    }
+
+    /**
+     * The Sign-In client object.
+     */
+    var auth2;
+
+    /**
+     * Initializes the Sign-In client.
+     */
+    var initClient = function() {
+        gapi.load('auth2', function() {
+            /**
+             * Retrieve the singleton for the GoogleAuth library and set up the
+             * client.
+             */
+            auth2 = gapi.auth2.init({
+                client_id: '1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com'
+            });
+
+            // Attach the click handler to the sign-in button
+            auth2.attachClickHandler('signin-button', {}, onSuccess, onFailure);
+        });
+    };
+
+    /**
+     * Handle successful sign-ins.
+     */
+    var onSuccess = function(user) {
+        console.log('Signed in as ' + user.getBasicProfile().getName());
+    };
+
+    /**
+     * Handle sign-in failures.
+     */
+    var onFailure = function(error) {
+        console.log(error);
+    };
+
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
+        authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
+        databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
+        projectId: "restaurantroulet-1491174705978",
+        storageBucket: "restaurantroulet-1491174705978.appspot.com",
+        messagingSenderId: "1096863395822"
+    };
+    firebase.initializeApp(config);
 
 
     var map;
@@ -41,11 +81,14 @@ function onSuccess(googleUser) {
     //var cuisine = document.getElementById("cuisine-topics")
 
     //create object for navigator if its enabled for this user
-    if(navigator.geolocation){
-        var userCoordinates = navigator.geolocation.getCurrentPosition(success, failure);
+    if (navigator.geolocation) {
+        console.log("Executing coordinate fetch");
+        navigator.geolocation.getCurrentPosition(success, failure, { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true });
+        console.log("Mylocation: " + myLocation.latitude + " ++ " + myLocation.longitude);
     } else {
         //if its not enabled keep track so we can do sensible things like ask their zipcode
         //and... we might want their zipcode anyway if they are trying to establish results for some other place
+        console.log("No support for nav coord");
         supportsNav = false;
     }
 
@@ -53,7 +96,7 @@ function onSuccess(googleUser) {
     var zCities = "";
     var zCuisines = "";
 
-    function getCities(){
+    function getCities() {
         $.ajax({
             type: "POST",
             beforeSend: function(request) {
@@ -67,35 +110,41 @@ function onSuccess(googleUser) {
         });
     }
 
-    function getCuisines(position){
-        console.log(position);
+    function getCuisines(position) {
+        //setup remote call to get cuisines from zomato, this requires
+        //our user token as a header for authentication
         $.ajax({
-            beforeSend: function(request) {
-                 request.setRequestHeader("user-key", zomatoToken);
-            },
-            method: "GET",
-            dataType: "json",
-            url: "https://api.zomato.com/v2.1/cuisines?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude,
-            dataType: "jsonp",
-        })
-        .done(function(msg) {
-            zCuisines = JSON.parse(msg);
-            console.log(zCuisines);
-            for (i = 0; i < zCuisines.cuisines.length; i++) {
-                var cID = zCuisines[i].cuisine_id;
-                var cName = zCuisines[i].cuisine_name;
-                var newCatDiv  = "<div class=\"catClass\">";
+                beforeSend: function(request) {
+                    request.setRequestHeader("user-key", zomatoToken);
+                },
+                method: "GET",
+                dataType: "json",
+                url: "https://developers.zomato.com/api/v2.1/cuisines?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude,
+
+            })
+            .done(function(msg) {
+                //Assign the return object array of cuisines to zCuisines for readability
+                zCuisines = msg.cuisines;
+                //iterate through the returned cuisines
+                for (i = 0; i < zCuisines.length; i++) {
+                    //set names for vars so we dont have to constantly make long calls
+                    var cID = zCuisines[i].cuisine.cuisine_id;
+                    var cName = zCuisines[i].cuisine.cuisine_name;
+                    //create a new div for selection using the values returned from cuisine
+                    var newCatDiv = "<div id=\"catClass\">";
                     newCatDiv += "  <input type=\"checkbox\" ";
-                    newCatDiv += "  name=\"" + cName + "\" id=\"" + cName + "\" value=\"" + cID + "\"></input>";
+                    newCatDiv += "  name=\"cuisinelist\" id=\"" + cName + "\" value=\"" + cID + "\"></input>";
                     newCatDiv += "  <label for=\"" + cName + "\">" + cName + "</label>";
                     newCatDiv += "</div>";
-                $("div#cuisine-cats").children.clone.appendTo("div#cuisine-cats");
-                console.log("from zCuisines we found: Cid: " + cID + " CName: " + cName);
-            }
-        });
+                    console.log(newCatDiv);
+                    //Append our new cuisine category to the existing div
+                    $(newCatDiv).appendTo("div.cuisine-cats");
+                }
+            });
     }
 
     function success(position) {
+        console.log("Position: " + position);
         var myLat = position.coords.latitude;
         var myLong = position.coords.longitude;
 
@@ -122,10 +171,10 @@ function onSuccess(googleUser) {
             position: coords,
             animation: google.maps.Animation.DROP
         });
-        marker.addListener('click', toggleBounce);
+        marker.addListener('load', toggleBounce);
 
         function toggleBounce() {
-            if (marker.getAnimation() !==null) {
+            if (marker.getAnimation() !== null) {
                 marker.setAnimation(null);
             } else {
                 marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -145,7 +194,8 @@ function onSuccess(googleUser) {
 
 
 
-    function failure() {    
+    function failure() {
+        console.log("Failed to get location");
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
@@ -172,7 +222,7 @@ function onSuccess(googleUser) {
             center: latLng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-    };  
+    };
 
 
 
@@ -181,17 +231,39 @@ function onSuccess(googleUser) {
     // ZOMATO API
     $(".spin").on("click", function(spin) {
 
-        var zQueryUrl  = "https://developers.zomato.com/api/v2.1/search?";
-            zQueryUrl += "count=20&lat=myLocation.latitude&lon=myLocation.longitude&cuisines=1%2C6&sort=cost&order=desc";
+        //setup our remote url with appropriate arguments for long and lat
+        var zQueryUrl = "https://developers.zomato.com/api/v2.1/search?";
+        zQueryUrl += "count=20&lat=" + myLocation.latitude + "&lon=" + myLocation.longitude + "&sort=cost&order=desc";
+        /*We also need to determine if any categories have been clicked and assign
+         * them to the search get parameter in a comma seperated list
+         */
+        var cSelections = [];
+        var hasCuisines = false;
+        $("div#catClass input:checked").each(function() {
+            cSelections.push($(this).attr('value'));
+            hasCuisines = true;
+        });
+        var checkCuisineCats = "";
+        //Only modify the remote url if we have checkboxes checked
+        if (hasCuisines) {
+            for (i = 0; i < cSelections.length; i++) {
+                if (i == 0) {
+                    //because these need to be comma seperated values we need a way to distinguish the start query param
+                    checkCuisineCats = "&cuisines=" + cSelections[i];
+                } else {
+                    checkCuisineCats += "," + cSelections[i];
+                }
+            }
+            //And add the new cuisine categories to the zQueryUrl for the remote zomato call
+            zQueryUrl += checkCuisineCats;
+        }
 
-        var queryURL = "https://api.foursquare.com/v2/venues/search?";
-        var clientID = "1FJHV4PFHEKFZBZSQYSMR4HIQROYJQQWBVFJEOOYPK0VHZ4E";
-        var clientSecret = "MDXKXS4BVTHR13UBMRLJ35PENUSFUDDFZXMHN2IZCDCDBVEZ";
+        console.log("printing cselections");
+        console.log(cSelections);
 
-        var searchURL = queryURL + "categoryId=4d4b7105d754a06374d81259&ll=" + myLocation.latitude + "," + myLocation.longitude + "&client_id=" + clientID + "&client_secret=" + clientSecret + "&v=20181231" + "&limit=10" + "&radius=16093.4";
-
-
-
+        console.log("location long: " + myLocation.longitude);
+        console.log("location lat: " + myLocation.latitude);
+        console.log(zQueryUrl);
         $.ajax({
                 url: zQueryUrl,
                 beforeSend: function(request) {
@@ -201,30 +273,45 @@ function onSuccess(googleUser) {
                 dataType: "json",
             })
             .done(function(response) {
-                console.log(response);
+                //Assign reponse restaurants array to venues to simplify naming
                 var venues = response.restaurants;
-                //window.eqfeed_callback = function(results) {
 
+                //iterate venues array for individual restaurants
+                //ok iteration with a for loop was awesome for showing all the location...
+                //but... we want to pick just one... at random even. so...
+                var i = Math.floor((Math.random() * venues.length));
 
+                //for (i = 0; i < venues.length; i++) {
+                //console.log(venues[i].restaurant.location);
+                //var location = venues[i].restaurant.location;
 
+                var lati = parseFloat(venues[i].restaurant.location.latitude);
+                var longi = parseFloat(venues[i].restaurant.location.longitude);
+                var resTitle = "<a href=\"" + venues[i].restaurant.url + "\">";
+                resTitle += venues[i].restaurant.name;
+                resTitle += "</a>";
 
-                for (i = 0; i < venues.length; i++) {
-                    var location = venues[i].location.latitude;
+                console.log(venues[i].restaurant);
 
-                    var lati = venues[i].location.latitude;
-                    var longi = venues[i].location.longitude;
+                var marker = new google.maps.Marker({
+                    position: { lat: lati, lng: longi },
+                    map: map,
+                    title: venues[i].restaurant.name,
+                });
 
-                    var marker = new google.maps.Marker({
-                        position: { lat: lati, lng: longi },
-                        map: map
-                    });
+                //push thumbtack to google map... we prob should recenter
+                //the map view to the new location.
+                marker.setMap(map);
 
-                    marker.setMap(map);
-
-                    console.log(marker.setPosition);
-
-                    //}
+                //recenter to include the new location
+                if (!map.getBounds().contains(marker.getPosition())) {
+                    map.panTo(marker.getPosition());
                 }
+
+                //where did we put it?
+                console.log(marker.setPosition);
+                //}
+                //}
                 // google.maps.event.addDomListener(window, 'load', initialize);
 
             });
