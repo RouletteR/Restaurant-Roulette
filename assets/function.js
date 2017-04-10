@@ -1,17 +1,68 @@
 $(document).ready(function() {
 
-    
 
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
-    authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
-    databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
-    projectId: "restaurantroulet-1491174705978",
-    storageBucket: "restaurantroulet-1491174705978.appspot.com",
-    messagingSenderId: "1096863395822"
-  };
-  firebase.initializeApp(config);
+    function renderButton() {
+
+        gapi.signin2.render('my-signin2', {
+            'scope': 'profile email',
+            'width': 240,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });
+    }
+
+    /**
+     * The Sign-In client object.
+     */
+    var auth2;
+
+    /**
+     * Initializes the Sign-In client.
+     */
+    var initClient = function() {
+        gapi.load('auth2', function() {
+            /**
+             * Retrieve the singleton for the GoogleAuth library and set up the
+             * client.
+             */
+            auth2 = gapi.auth2.init({
+                client_id: '1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com'
+            });
+
+            // Attach the click handler to the sign-in button
+            auth2.attachClickHandler('signin-button', {}, onSuccess, onFailure);
+        });
+    };
+
+    /**
+     * Handle successful sign-ins.
+     */
+    var onSuccess = function(user) {
+        console.log('Signed in as ' + user.getBasicProfile().getName());
+    };
+
+    /**
+     * Handle sign-in failures.
+     */
+    var onFailure = function(error) {
+        console.log(error);
+    };
+
+
+
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
+        authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
+        databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
+        projectId: "restaurantroulet-1491174705978",
+        storageBucket: "restaurantroulet-1491174705978.appspot.com",
+        messagingSenderId: "1096863395822"
+    };
+    firebase.initializeApp(config);
 
 
     var map;
@@ -26,10 +77,13 @@ $(document).ready(function() {
 
     //create object for navigator if its enabled for this user
     if (navigator.geolocation) {
-        var userCoordinates = navigator.geolocation.getCurrentPosition(success, failure);
+        console.log("Executing coordinate fetch");
+        navigator.geolocation.getCurrentPosition(success, failure, { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true });
+        console.log("Mylocation: " + myLocation.latitude + " ++ " + myLocation.longitude);
     } else {
         //if its not enabled keep track so we can do sensible things like ask their zipcode
         //and... we might want their zipcode anyway if they are trying to establish results for some other place
+        console.log("No support for nav coord");
         supportsNav = false;
     }
 
@@ -52,36 +106,40 @@ $(document).ready(function() {
     }
 
     function getCuisines(position) {
-        console.log(position);
+        //setup remote call to get cuisines from zomato, this requires
+        //our user token as a header for authentication
         $.ajax({
                 beforeSend: function(request) {
                     request.setRequestHeader("user-key", zomatoToken);
                 },
-
                 method: "GET",
                 dataType: "json",
-                url: "https://api.zomato.com/v2.1/cuisines?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude,
-                
-                //dataType: "jsonp",
+                url: "https://developers.zomato.com/api/v2.1/cuisines?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude,
+
             })
             .done(function(msg) {
-                zCuisines = JSON.parse(msg);
-                console.log(msg);
-                for (i = 0; i < zCuisines.cuisines.length; i++) {
-                    var cID = zCuisines[i].cuisine_id;
-                    var cName = zCuisines[i].cuisine_name;
-                    var newCatDiv = "<div class=\"catClass\">";
+                //Assign the return object array of cuisines to zCuisines for readability
+                zCuisines = msg.cuisines;
+                //iterate through the returned cuisines
+                for (i = 0; i < zCuisines.length; i++) {
+                    //set names for vars so we dont have to constantly make long calls
+                    var cID = zCuisines[i].cuisine.cuisine_id;
+                    var cName = zCuisines[i].cuisine.cuisine_name;
+                    //create a new div for selection using the values returned from cuisine
+                    var newCatDiv = "<div id=\"catClass\">";
                     newCatDiv += "  <input type=\"checkbox\" ";
-                    newCatDiv += "  name=\"" + cName + "\" id=\"" + cName + "\" value=\"" + cID + "\"></input>";
+                    newCatDiv += "  name=\"cuisinelist\" id=\"" + cName + "\" value=\"" + cID + "\"></input>";
                     newCatDiv += "  <label for=\"" + cName + "\">" + cName + "</label>";
                     newCatDiv += "</div>";
-                    $("div#cuisine-cats").children.clone.appendTo("div#cuisine-cats");
-                    console.log("from zCuisines we found: Cid: " + cID + " CName: " + cName);
+                    console.log(newCatDiv);
+                    //Append our new cuisine category to the existing div
+                    $(newCatDiv).appendTo("div.cuisine-cats");
                 }
             });
     }
 
     function success(position) {
+        console.log("Position: " + position);
         var myLat = position.coords.latitude;
         var myLong = position.coords.longitude;
 
@@ -108,7 +166,7 @@ $(document).ready(function() {
             position: coords,
             animation: google.maps.Animation.DROP
         });
-        marker.addListener('click', toggleBounce);
+        marker.addListener('load', toggleBounce);
 
         function toggleBounce() {
             if (marker.getAnimation() !== null) {
@@ -129,9 +187,9 @@ $(document).ready(function() {
 
     }
 
-
-
     function failure() {
+        console.log("Failed to get location");
+
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
@@ -152,8 +210,6 @@ $(document).ready(function() {
         $("#Layer_1").velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
     });
 
-
-
     function initialize() {
         var latLng = new google.maps.LatLng({ location_latitude }, { location_longitude });
         map = new google.maps.Map(document.getElementById('map'), {
@@ -162,63 +218,105 @@ $(document).ready(function() {
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
+    };
+
+    // ZOMATO API
+    $(".spin").on("click", function(spin) {
+
+        var zQueryUrl = "https://developers.zomato.com/api/v2.1/search?";
+        zQueryUrl += "count=20&lat=myLocation.latitude&lon=myLocation.longitude&cuisines=1%2C6&sort=cost&order=desc";
+
+        //setup our remote url with appropriate arguments for long and lat
+        var zQueryUrl = "https://developers.zomato.com/api/v2.1/search?";
+        zQueryUrl += "count=20&lat=" + myLocation.latitude + "&lon=" + myLocation.longitude + "&sort=cost&order=desc";
+        /*We also need to determine if any categories have been clicked and assign
+         * them to the search get parameter in a comma seperated list
+         */
+        var cSelections = [];
+        var hasCuisines = false;
+        $("div#catClass input:checked").each(function() {
+            cSelections.push($(this).attr('value'));
+            hasCuisines = true;
+        });
+        var checkCuisineCats = "";
+        //Only modify the remote url if we have checkboxes checked
+        if (hasCuisines) {
+            for (i = 0; i < cSelections.length; i++) {
+                if (i == 0) {
+                    //because these need to be comma seperated values we need a way to distinguish the start query param
+                    checkCuisineCats = "&cuisines=" + cSelections[i];
+                } else {
+                    checkCuisineCats += "," + cSelections[i];
+                }
+            }
+            //And add the new cuisine categories to the zQueryUrl for the remote zomato call
+            zQueryUrl += checkCuisineCats;
+        }
+
+        console.log("printing cselections");
+        console.log(cSelections);
+        console.log("location long: " + myLocation.longitude);
+        console.log("location lat: " + myLocation.latitude);
+        console.log(zQueryUrl);
+        $.ajax({
+                url: zQueryUrl,
+                beforeSend: function(request) {
+                    request.setRequestHeader("user-key", zomatoToken);
+                },
+                method: "GET",
+                dataType: "json",
+            })
+            .done(function(response) {
+                //Assign reponse restaurants array to venues to simplify naming
+                var venues = response.restaurants;
 
 
+                //iterate venues array for individual restaurants
+                //ok iteration with a for loop was awesome for showing all the location...
+                //but... we want to pick just one... at random even. so...
+                var i = Math.floor((Math.random() * venues.length));
 
 
+                //for (i = 0; i < venues.length; i++) {
+                //console.log(venues[i].restaurant.location);
+                //var location = venues[i].restaurant.location;
 
-        // ZOMATO API
-        $(".spin").on("click", function(spin) {
+                var lati = parseFloat(venues[i].restaurant.location.latitude);
+                var longi = parseFloat(venues[i].restaurant.location.longitude);
+                var resTitle = "<a href=\"" + venues[i].restaurant.url + "\">";
+                resTitle += venues[i].restaurant.name;
+                resTitle += "</a>";
 
-            var zQueryUrl = "https://developers.zomato.com/api/v2.1/search?";
-            zQueryUrl += "count=20&lat=myLocation.latitude&lon=myLocation.longitude&cuisines=1%2C6&sort=cost&order=desc";
+                console.log(venues[i].restaurant);
 
-            // var queryURL = "https://api.foursquare.com/v2/venues/search?";
-            // var clientID = "1FJHV4PFHEKFZBZSQYSMR4HIQROYJQQWBVFJEOOYPK0VHZ4E";
-            // var clientSecret = "MDXKXS4BVTHR13UBMRLJ35PENUSFUDDFZXMHN2IZCDCDBVEZ";
-
-            // var searchURL = queryURL + "categoryId=4d4b7105d754a06374d81259&ll=" + myLocation.latitude + "," + myLocation.longitude + "&client_id=" + clientID + "&client_secret=" + clientSecret + "&v=20181231" + "&limit=10" + "&radius=16093.4";
-
-
-
-            $.ajax({
-                    url: zQueryURL,
-                    // beforeSend: function(request) {
-                    //     request.setRequestHeader("user-key", zomatoToken);
-                    // },
-                    headers: {"user_key" : dca67eb8985f5c35feb36be8f385781a},
-                    method: "GET",
-                    dataType: "json",
-                })
-                .done(function(response) {
-                    console.log(response);
-
-                    var venues = response.restaurants;
-
-
-                    for (i = 0; i < venues.length; i++) {
-                        var location = venues[i].location.latitude;
-
-                        var lati = venues[i].location.latitude;
-                        var longi = venues[i].location.longitude;
-
-                        var marker = new google.maps.Marker({
-
-
-                            position: { lat: lati, lng: longi },
-                            map: map
-
-                        });
-
-                        marker.setMap(map);
-
-                        console.log(marker.setPosition);
-
-                        //}
-                    }
-
+                var marker = new google.maps.Marker({
+                    position: { lat: lati, lng: longi },
+                    map: map,
+                    title: venues[i].restaurant.name,
                 });
 
-        });
-    }
+                //push thumbtack to google map... we prob should recenter
+                //the map view to the new location.
+                marker.setMap(map);
+
+                //recenter to include the new location
+                if (!map.getBounds().contains(marker.getPosition())) {
+                    map.panTo(marker.getPosition());
+                }
+
+                //where did we put it?
+                console.log(marker.setPosition);
+                //}
+                //}
+                // google.maps.event.addDomListener(window, 'load', initialize);
+
+                console.log(marker.setPosition);
+
+                //}
+
+
+
+
+            });
+    });
 });
