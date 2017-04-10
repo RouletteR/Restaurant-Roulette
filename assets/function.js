@@ -1,14 +1,19 @@
 $(document).ready(function() {
 
-    var config = {
-        apiKey: "AIzaSyCsDQwdx7-Xef36ZuB8RR8muiQhL0TMTEE",
-        authDomain: "restaurant-roulette-e48d8.firebaseapp.com",
-        databaseURL: "https://restaurant-roulette-e48d8.firebaseio.com",
-        projectId: "restaurant-roulette-e48d8",
-        storageBucket: "restaurant-roulette-e48d8.appspot.com",
-        messagingSenderId: "559745798878"
-    };
-    firebase.initializeApp(config);
+  
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
+    authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
+    databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
+    projectId: "restaurantroulet-1491174705978",
+    storageBucket: "restaurantroulet-1491174705978.appspot.com",
+    messagingSenderId: "1096863395822"
+  };
+  firebase.initializeApp(config);
+
+>>>>>>> 89e2715695d69b2c11a535f2adae8fb107a518da
 
     var map;
     var venues = {};
@@ -168,7 +173,7 @@ $(document).ready(function() {
 
 
 
-    // FOURSQUARE API
+    // ZOMATO API
     $(".spin").on("click", function(spin) {
 
         //setup our remote url with appropriate arguments for long and lat
