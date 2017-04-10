@@ -5,23 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <!-- css style file -->
     <link rel="stylesheet" href="assets/style.css">
+    <!-- google log in api -->
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <meta name="google-signin-client_id" content="1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com">
     <title>Restaurant Roullete</title>
 </head>
 
 <body>
     <div class="container" id="container1">
         <div class="nav-wrapper">
+        <!-- roulette logo -->
             <a href="#" class="brand-logo"><img src="assets/images/rouletter-logo.svg"></a>
             <div class="row">
                 <form>
-                    <ul class="left">
+                    <ul class="col-sm-2">
                         <li>
+                        <!-- zip code box -->
                             <div class="input-field location">
                                 <input type="search" placeholder="Town or Zip Code">
                             </div>
                         </li>
-               
+                    </ul>
+                    <!-- google sign in -->
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    <!-- dropdown button with cuisine topics -->
+                    <a class="dropdown-button btn" href="#" data-activates='dropdown1'>Cuisine</a>
+                    <ul id="dropdown1" class="dropdown-content">
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="Italian" id="Italian" value="1" />
+                            <label for="Italian">Italian</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="Mediterranean" id="Mediterranean" value="2" />
+                            <label for="Mediterranean">Mediterranean</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="Chinese" id="Chinese" value="3" />
+                            <label for="Chinese">Chinese</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="Japanese" id="Japanese" value="4" />
+                            <label for="Japanese">Japanese</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="Mexican" id="Mexican" value="5" />
+                            <label for="Mexican">Mexican</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="Breakfast" id="Breakfast" value="6" />
+                            <label for="Breakfast">Breakfast</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="BBQ" id="BBQ" value="7" />
+                            <label for="BBQ">BBQ</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="Vegan" id="Vegan" value="8" />
+                            <label for="Vegan">Vegan</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="Deli" id="Deli" value="9" />
+                            <label for="Deli">Deli</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="Thai" id="Thai" value="10" />
+                            <label for="Thai">Thai</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="Seafood" id="Seafood" value="11" />
+                            <label for="Seafood">Seafood</label>
+                        </div>
+                        <div class="cuisine-topics">
+                            <input type="checkbox" name="American" id="American" value="12" />
+                            <label for="American">American</label>
+                        </div>
+                    </ul>
+           
             <li><a class="dropdown-button btn" href="#" data-activates='dropdown1'>Cuisine</a>
                 <ul id="dropdown1" class="dropdown-content">
                     <div class="cuisine-cats">
@@ -54,8 +115,9 @@
     <script src="assets/function.js"></script>
     <!-- Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDWzDt9fieUIfutEaGsbL89dDo509JL1M"></script>
-    <!-- <script src="httlp://maps.google.com/maps/api/js?sensor=true"></script> -->
+    <!-- <script src="httlp://maps.google.com/maps/api/js?sensor=true"></script> -
 </body>
+<!-- code for animating the wheel -->
 <div class="svg hidden">
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80%" height="80%" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
