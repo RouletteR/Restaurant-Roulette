@@ -1,15 +1,8 @@
 $(document).ready(function() {
 
 
-    function onSuccess(googleUser) {
-        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    }
-
-    function onFailure(error) {
-        console.log(error);
-    }
-
     function renderButton() {
+
         gapi.signin2.render('my-signin2', {
             'scope': 'profile email',
             'width': 240,
@@ -58,16 +51,18 @@ $(document).ready(function() {
         console.log(error);
     };
 
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
-        authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
-        databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
-        projectId: "restaurantroulet-1491174705978",
-        storageBucket: "restaurantroulet-1491174705978.appspot.com",
-        messagingSenderId: "1096863395822"
-    };
-    firebase.initializeApp(config);
+  
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
+    authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
+    databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
+    projectId: "restaurantroulet-1491174705978",
+    storageBucket: "restaurantroulet-1491174705978.appspot.com",
+    messagingSenderId: "1096863395822"
+  };
+  firebase.initializeApp(config);
 
 
     var map;
