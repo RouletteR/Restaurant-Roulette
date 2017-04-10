@@ -13,8 +13,6 @@ $(document).ready(function() {
   };
   firebase.initializeApp(config);
 
->>>>>>> 89e2715695d69b2c11a535f2adae8fb107a518da
-
     var map;
     var venues = {};
     var myLocation = {
