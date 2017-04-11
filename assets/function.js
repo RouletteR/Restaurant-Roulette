@@ -63,139 +63,126 @@ $(document).ready(function() {
     };
     firebase.initializeApp(config);
 
-// function onSignIn(googleUser) {
-//   var profile = googleUser.getBasicProfile();
-//   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-//   console.log('Name: ' + profile.getName());
-//   console.log('Image URL: ' + profile.getImageUrl());
-//   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-// }
+    // function onSignIn(googleUser) {
+    //   var profile = googleUser.getBasicProfile();
+    //   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    //   console.log('Name: ' + profile.getName());
+    //   console.log('Image URL: ' + profile.getImageUrl());
+    //   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    // }
 
-// function signOut() {
-//     var auth2 = gapi.auth2.getAuthInstance();
-//     auth2.signOut().then(function () {
-//       console.log('User signed out.');
-//     });
-//   }
+    // function signOut() {
+    //     var auth2 = gapi.auth2.getAuthInstance();
+    //     auth2.signOut().then(function () {
+    //       console.log('User signed out.');
+    //     });
+    //   }
 
 
-// function renderButton() {
+    // function renderButton() {
 
-//  gapi.signin2.render('my-signin2', {
-//  'scope': 'profile email',
-//   'width': 240,
-//   'height': 50,
-//     'longtitle': true,
-//   'theme': 'dark',
-//    'onsuccess': onSuccess,
-//    'onfailure': onFailure
-// });
+    //  gapi.signin2.render('my-signin2', {
+    //  'scope': 'profile email',
+    //   'width': 240,
+    //   'height': 50,
+    //     'longtitle': true,
+    //   'theme': 'dark',
+    //    'onsuccess': onSuccess,
+    //    'onfailure': onFailure
+    // });
 
-// var auth2; // The Sign-In object.
-// var googleUser; // The current user.
+    // var auth2; // The Sign-In object.
+    // var googleUser; // The current user.
 
-// /**
-//  * Calls startAuth after Sign in V2 finishes setting up.
-//  */
-// var appStart = function() {
-//   gapi.load('auth2', initSigninV2);
-// };
+    // /**
+    //  * Calls startAuth after Sign in V2 finishes setting up.
+    //  */
+    // var appStart = function() {
+    //   gapi.load('auth2', initSigninV2);
+    // };
 
-// /**
-//  * Initializes Signin v2 and sets up listeners.
-//  */
-// var initSigninV2 = function() {
-//   auth2 = gapi.auth2.init({
-//       client_id: '1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com',
-//       scope: 'profile'
-//   });
+    // /**
+    //  * Initializes Signin v2 and sets up listeners.
+    //  */
+    // var initSigninV2 = function() {
+    //   auth2 = gapi.auth2.init({
+    //       client_id: '1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com',
+    //       scope: 'profile'
+    //   });
 
-//   // Listen for sign-in state changes.
-//   auth2.isSignedIn.listen(signinChanged);
+    //   // Listen for sign-in state changes.
+    //   auth2.isSignedIn.listen(signinChanged);
 
-//   // Listen for changes to current user.
-//   auth2.currentUser.listen(userChanged);
+    //   // Listen for changes to current user.
+    //   auth2.currentUser.listen(userChanged);
 
-//   // Sign in the user if they are currently signed in.
-//   if (auth2.isSignedIn.get() == true) {
-//     auth2.signIn();
-//   }
+    //   // Sign in the user if they are currently signed in.
+    //   if (auth2.isSignedIn.get() == true) {
+    //     auth2.signIn();
+    //   }
 
-//   // Start with the current live values.
-//   refreshValues();
-// };
+    //   // Start with the current live values.
+    //   refreshValues();
+    // };
 
-// *
-//  * Listener method for sign-out live value.
-//  *
-//  * @param {boolean} val the updated signed out state.
- 
-// var signinChanged = function (val) {
-//   console.log('Signin state changed to ', val);
-//   document.getElementById('signed-in-cell').innerText = val;
-// };
+    // *
+    //  * Listener method for sign-out live value.
+    //  *
+    //  * @param {boolean} val the updated signed out state.
 
-// /**
-//  * Listener method for when the user changes.
-//  *
-//  * @param {GoogleUser} user the updated user.
-//  */
-// var userChanged = function (user) {
-//   console.log('User now: ', user);
-//   googleUser = user;
-//   updateGoogleUser();
-//   document.getElementById('curr-user-cell').innerText =
-//     JSON.stringify(user, undefined, 2);
-// };
+    // var signinChanged = function (val) {
+    //   console.log('Signin state changed to ', val);
+    //   document.getElementById('signed-in-cell').innerText = val;
+    // };
 
-// /**
-//  * Updates the properties in the Google User table using the current user.
-//  */
-// var updateGoogleUser = function () {
-//   if (googleUser) {
-//     document.getElementById('user-id').innerText = googleUser.getId();
-//     document.getElementById('user-scopes').innerText =
-//       googleUser.getGrantedScopes();
-//     document.getElementById('auth-response').innerText =
-//       JSON.stringify(googleUser.getAuthResponse(), undefined, 2);
-//   } else {
-//     document.getElementById('user-id').innerText = '--';
-//     document.getElementById('user-scopes').innerText = '--';
-//     document.getElementById('auth-response').innerText = '--';
-//   }
-// };
+    // /**
+    //  * Listener method for when the user changes.
+    //  *
+    //  * @param {GoogleUser} user the updated user.
+    //  */
+    // var userChanged = function (user) {
+    //   console.log('User now: ', user);
+    //   googleUser = user;
+    //   updateGoogleUser();
+    //   document.getElementById('curr-user-cell').innerText =
+    //     JSON.stringify(user, undefined, 2);
+    // };
 
-// /**
-//  * Retrieves the current user and signed in states from the GoogleAuth
-//  * object.
-//  */
-// var refreshValues = function() {
-//   if (auth2){
-//     console.log('Refreshing values...');
+    // /**
+    //  * Updates the properties in the Google User table using the current user.
+    //  */
+    // var updateGoogleUser = function () {
+    //   if (googleUser) {
+    //     document.getElementById('user-id').innerText = googleUser.getId();
+    //     document.getElementById('user-scopes').innerText =
+    //       googleUser.getGrantedScopes();
+    //     document.getElementById('auth-response').innerText =
+    //       JSON.stringify(googleUser.getAuthResponse(), undefined, 2);
+    //   } else {
+    //     document.getElementById('user-id').innerText = '--';
+    //     document.getElementById('user-scopes').innerText = '--';
+    //     document.getElementById('auth-response').innerText = '--';
+    //   }
+    // };
 
-//     googleUser = auth2.currentUser.get();
+    // /**
+    //  * Retrieves the current user and signed in states from the GoogleAuth
+    //  * object.
+    //  */
+    // var refreshValues = function() {
+    //   if (auth2){
+    //     console.log('Refreshing values...');
 
-//     document.getElementById('curr-user-cell').innerText =
-//       JSON.stringify(googleUser, undefined, 2);
-//     document.getElementById('signed-in-cell').innerText =
-//       auth2.isSignedIn.get();
+    //     googleUser = auth2.currentUser.get();
 
-//     updateGoogleUser();
-//   }
-// }
->>>>>>> 7e7e053c2262e43493a6a89faf83b630650d6481
-  
+    //     document.getElementById('curr-user-cell').innerText =
+    //       JSON.stringify(googleUser, undefined, 2);
+    //     document.getElementById('signed-in-cell').innerText =
+    //       auth2.isSignedIn.get();
 
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
-    authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
-    databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
-    projectId: "restaurantroulet-1491174705978",
-    storageBucket: "restaurantroulet-1491174705978.appspot.com",
-    messagingSenderId: "1096863395822"
-  };
-  firebase.initializeApp(config);
+    //     updateGoogleUser();
+    //   }
+    // }
 
     var map;
     var venues = {};
@@ -208,14 +195,14 @@ $(document).ready(function() {
     //var cuisine = document.getElementById("cuisine-topics")
 
     //create object for navigator if its enabled for this user
-    if(navigator.geolocation){
-	console.log("Executing coordinate fetch");
-        navigator.geolocation.getCurrentPosition(success, failure,{maximumAge:600000, timeout:5000,enableHighAccuracy:true});
-	console.log("Mylocation: " + myLocation.latitude + " ++ " + myLocation.longitude);
+    if (navigator.geolocation) {
+        console.log("Executing coordinate fetch");
+        navigator.geolocation.getCurrentPosition(success, failure, { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true });
+        console.log("Mylocation: " + myLocation.latitude + " ++ " + myLocation.longitude);
     } else {
         //if its not enabled keep track so we can do sensible things like ask their zipcode
         //and... we might want their zipcode anyway if they are trying to establish results for some other place
-	console.log("No support for nav coord");
+        console.log("No support for nav coord");
         supportsNav = false;
     }
 
@@ -225,7 +212,7 @@ $(document).ready(function() {
     var zCities = "";
     var zCuisines = "";
 
-    function getCities(){
+    function getCities() {
         $.ajax({
             type: "POST",
             beforeSend: function(request) {
@@ -239,41 +226,41 @@ $(document).ready(function() {
         });
     }
 
-    function getCuisines(position){
+    function getCuisines(position) {
         //setup remote call to get cuisines from zomato, this requires
         //our user token as a header for authentication
         $.ajax({
-            beforeSend: function(request) {
-                 request.setRequestHeader("user-key", zomatoToken);
-            },
-            method: "GET",
-            dataType: "json",
-            url: "https://developers.zomato.com/api/v2.1/cuisines?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude,
+                beforeSend: function(request) {
+                    request.setRequestHeader("user-key", zomatoToken);
+                },
+                method: "GET",
+                dataType: "json",
+                url: "https://developers.zomato.com/api/v2.1/cuisines?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude,
 
-        })
-        .done(function(msg) {
-            //Assign the return object array of cuisines to zCuisines for readability
-            zCuisines = msg.cuisines;
-            //iterate through the returned cuisines
-            for (i = 0; i < zCuisines.length; i++) {
-                //set names for vars so we dont have to constantly make long calls
-                var cID = zCuisines[i].cuisine.cuisine_id;
-                var cName = zCuisines[i].cuisine.cuisine_name;
-                //create a new div for selection using the values returned from cuisine
-                var newCatDiv  = "<div id=\"catClass\">";
+            })
+            .done(function(msg) {
+                //Assign the return object array of cuisines to zCuisines for readability
+                zCuisines = msg.cuisines;
+                //iterate through the returned cuisines
+                for (i = 0; i < zCuisines.length; i++) {
+                    //set names for vars so we dont have to constantly make long calls
+                    var cID = zCuisines[i].cuisine.cuisine_id;
+                    var cName = zCuisines[i].cuisine.cuisine_name;
+                    //create a new div for selection using the values returned from cuisine
+                    var newCatDiv = "<div id=\"catClass\">";
                     newCatDiv += "  <input type=\"checkbox\" ";
                     newCatDiv += "  name=\"cuisinelist\" id=\"" + cName + "\" value=\"" + cID + "\"></input>";
                     newCatDiv += "  <label for=\"" + cName + "\">" + cName + "</label>";
                     newCatDiv += "</div>";
                     console.log(newCatDiv);
-                //Append our new cuisine category to the existing div
-                $(newCatDiv).appendTo("div.cuisine-cats");
-            }
-        });
+                    //Append our new cuisine category to the existing div
+                    $(newCatDiv).appendTo("div.cuisine-cats");
+                }
+            });
     }
 
     function success(position) {
-	    console.log("Position: " + position);
+        console.log("Position: " + position);
         var myLat = position.coords.latitude;
         var myLong = position.coords.longitude;
 
@@ -303,7 +290,7 @@ $(document).ready(function() {
         marker.addListener('load', toggleBounce);
 
         function toggleBounce() {
-            if (marker.getAnimation() !==null) {
+            if (marker.getAnimation() !== null) {
                 marker.setAnimation(null);
             } else {
                 marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -321,7 +308,7 @@ $(document).ready(function() {
 
     }
 
-    function failure() {    
+    function failure() {
 
         console.log("Failed to get location");
 
@@ -348,7 +335,7 @@ $(document).ready(function() {
     function initialize() {
         var latLng = new google.maps.LatLng({ location_latitude }, { location_longitude });
         map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 16,
+            zoom: 4,
             center: latLng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
@@ -362,22 +349,22 @@ $(document).ready(function() {
         zQueryUrl += "count=20&lat=myLocation.latitude&lon=myLocation.longitude&cuisines=1%2C6&sort=cost&order=desc";
 
         //setup our remote url with appropriate arguments for long and lat
-        var zQueryUrl  = "https://developers.zomato.com/api/v2.1/search?";
-            zQueryUrl += "count=20&lat=" + myLocation.latitude + "&lon=" + myLocation.longitude + "&sort=cost&order=desc";
+        var zQueryUrl = "https://developers.zomato.com/api/v2.1/search?";
+        zQueryUrl += "count=20&lat=" + myLocation.latitude + "&lon=" + myLocation.longitude + "&sort=cost&order=desc";
         /*We also need to determine if any categories have been clicked and assign
-        * them to the search get parameter in a comma seperated list
-        */
+         * them to the search get parameter in a comma seperated list
+         */
         var cSelections = [];
         var hasCuisines = false;
-        $( "div#catClass input:checked" ).each(function() {
+        $("div#catClass input:checked").each(function() {
             cSelections.push($(this).attr('value'));
             hasCuisines = true;
         });
         var checkCuisineCats = "";
         //Only modify the remote url if we have checkboxes checked
-        if(hasCuisines){
-            for(i = 0; i < cSelections.length; i++){
-                if(i == 0){
+        if (hasCuisines) {
+            for (i = 0; i < cSelections.length; i++) {
+                if (i == 0) {
                     //because these need to be comma seperated values we need a way to distinguish the start query param
                     checkCuisineCats = "&cuisines=" + cSelections[i];
                 } else {
@@ -392,8 +379,8 @@ $(document).ready(function() {
         console.log(cSelections);
 
 
-	    console.log("location long: " + myLocation.longitude);
-	    console.log("location lat: " + myLocation.latitude);
+        console.log("location long: " + myLocation.longitude);
+        console.log("location lat: " + myLocation.latitude);
 
         console.log(zQueryUrl);
         $.ajax({
@@ -413,8 +400,8 @@ $(document).ready(function() {
                 //ok iteration with a for loop was awesome for showing all the location...
                 //but... we want to pick just one... at random even. so...
 
-                var i = Math.floor((Math.random() * venues.length)); 
-                
+                var i = Math.floor((Math.random() * venues.length));
+
 
                 //for (i = 0; i < venues.length; i++) {
                 //console.log(venues[i].restaurant.location);
@@ -422,16 +409,55 @@ $(document).ready(function() {
 
                 var lati = parseFloat(venues[i].restaurant.location.latitude);
                 var longi = parseFloat(venues[i].restaurant.location.longitude);
-                var resTitle  = "<a href=\"" + venues[i].restaurant.url + "\">";
+
+
+                var resTitle = "<a href=\"" + venues[i].restaurant.url + "\">";
                     resTitle += venues[i].restaurant.name;
                     resTitle += "</a>";
 
+                var resAddress = "<a href=\"" + venues[i].restaurant.url + "\"";
+                    resAddress += venues[i].restaurant.location.address;
+                    resAddress += "</a>";
+
+                var resPhone = "<a href=\"" + venues[i].restaurant.phone_numbers + "\"";
+                    resPhone += venues[i].restaurant.phone_numbers;
+                    resPhone += "</a>";
+
+                var resRating = "<a href=\"" + venues[i].restaurant.user_rating.aggregate_rating + "\"";
+                    resRating += venues[i].restaurant.user_rating.aggregate_rating;
+                    resRating += "</a>";
+
+                var resCost = "<a href=\"" + venues[i].restaurant.url + "\"";
+                    resCost += venues[i].restaurant.average_cost_for_two;
+                    resCost += "</a>";
+
                 console.log(venues[i].restaurant);
+                console.log(venues[i].restaurant.phone_numbers);
+
+                // this string is designed to populate the balloon over the google maps marker
+                var contentString = '<div id="content">' +
+                    '<div id="siteNotice">' +
+                    '</div>' +
+                    '<div id="bodyContent">' +
+                    venues[i].restaurant.name + '<br>' +
+                    venues[i].restaurant.location.address + '<br>' +
+                    venues[i].restaurant.phone_numbers + '<br>' +
+                    'Average user rating on a 1 to 5 scale ' + venues[i].restaurant.user_rating.aggregate_rating + '<br>' +
+                    'Average cost for two $' + venues[i].restaurant.average_cost_for_two + 
+                    '</div>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
 
                 var marker = new google.maps.Marker({
                     position: { lat: lati, lng: longi },
                     map: map,
                     title: venues[i].restaurant.name,
+                });
+                marker.addListener('click', function() {
+                    infowindow.open(map, marker);
                 });
 
                 //push thumbtack to google map... we prob should recenter
@@ -439,13 +465,13 @@ $(document).ready(function() {
                 marker.setMap(map);
 
                 //recenter to include the new location
-                if(!map.getBounds().contains(marker.getPosition())){
+                if (!map.getBounds().contains(marker.getPosition())) {
                     map.panTo(marker.getPosition());
                 }
 
                 //where did we put it?
                 console.log(marker.setPosition);
-                    //}
+                //}
                 //}
                 // google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -460,4 +486,3 @@ $(document).ready(function() {
             });
     });
 });
-
