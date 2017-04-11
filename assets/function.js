@@ -1,5 +1,189 @@
 $(document).ready(function() {
 
+    function renderButton() {
+
+        gapi.signin2.render('my-signin2', {
+            'scope': 'profile email',
+            'width': 240,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });
+    }
+
+    /**
+     * The Sign-In client object.
+     */
+    var auth2;
+
+    /**
+     * Initializes the Sign-In client.
+     */
+    var initClient = function() {
+        gapi.load('auth2', function() {
+            /**
+             * Retrieve the singleton for the GoogleAuth library and set up the
+             * client.
+             */
+            auth2 = gapi.auth2.init({
+                client_id: '1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com'
+            });
+
+            // Attach the click handler to the sign-in button
+            auth2.attachClickHandler('signin-button', {}, onSuccess, onFailure);
+        });
+    };
+
+    /**
+     * Handle successful sign-ins.
+     */
+    var onSuccess = function(user) {
+        console.log('Signed in as ' + user.getBasicProfile().getName());
+    };
+
+    /**
+     * Handle sign-in failures.
+     */
+    var onFailure = function(error) {
+        console.log(error);
+    };
+
+
+
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
+        authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
+        databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
+        projectId: "restaurantroulet-1491174705978",
+        storageBucket: "restaurantroulet-1491174705978.appspot.com",
+        messagingSenderId: "1096863395822"
+    };
+    firebase.initializeApp(config);
+
+// function onSignIn(googleUser) {
+//   var profile = googleUser.getBasicProfile();
+//   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+//   console.log('Name: ' + profile.getName());
+//   console.log('Image URL: ' + profile.getImageUrl());
+//   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+// }
+
+// function signOut() {
+//     var auth2 = gapi.auth2.getAuthInstance();
+//     auth2.signOut().then(function () {
+//       console.log('User signed out.');
+//     });
+//   }
+
+
+// function renderButton() {
+
+//  gapi.signin2.render('my-signin2', {
+//  'scope': 'profile email',
+//   'width': 240,
+//   'height': 50,
+//     'longtitle': true,
+//   'theme': 'dark',
+//    'onsuccess': onSuccess,
+//    'onfailure': onFailure
+// });
+
+// var auth2; // The Sign-In object.
+// var googleUser; // The current user.
+
+// /**
+//  * Calls startAuth after Sign in V2 finishes setting up.
+//  */
+// var appStart = function() {
+//   gapi.load('auth2', initSigninV2);
+// };
+
+// /**
+//  * Initializes Signin v2 and sets up listeners.
+//  */
+// var initSigninV2 = function() {
+//   auth2 = gapi.auth2.init({
+//       client_id: '1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com',
+//       scope: 'profile'
+//   });
+
+//   // Listen for sign-in state changes.
+//   auth2.isSignedIn.listen(signinChanged);
+
+//   // Listen for changes to current user.
+//   auth2.currentUser.listen(userChanged);
+
+//   // Sign in the user if they are currently signed in.
+//   if (auth2.isSignedIn.get() == true) {
+//     auth2.signIn();
+//   }
+
+//   // Start with the current live values.
+//   refreshValues();
+// };
+
+// *
+//  * Listener method for sign-out live value.
+//  *
+//  * @param {boolean} val the updated signed out state.
+ 
+// var signinChanged = function (val) {
+//   console.log('Signin state changed to ', val);
+//   document.getElementById('signed-in-cell').innerText = val;
+// };
+
+// /**
+//  * Listener method for when the user changes.
+//  *
+//  * @param {GoogleUser} user the updated user.
+//  */
+// var userChanged = function (user) {
+//   console.log('User now: ', user);
+//   googleUser = user;
+//   updateGoogleUser();
+//   document.getElementById('curr-user-cell').innerText =
+//     JSON.stringify(user, undefined, 2);
+// };
+
+// /**
+//  * Updates the properties in the Google User table using the current user.
+//  */
+// var updateGoogleUser = function () {
+//   if (googleUser) {
+//     document.getElementById('user-id').innerText = googleUser.getId();
+//     document.getElementById('user-scopes').innerText =
+//       googleUser.getGrantedScopes();
+//     document.getElementById('auth-response').innerText =
+//       JSON.stringify(googleUser.getAuthResponse(), undefined, 2);
+//   } else {
+//     document.getElementById('user-id').innerText = '--';
+//     document.getElementById('user-scopes').innerText = '--';
+//     document.getElementById('auth-response').innerText = '--';
+//   }
+// };
+
+// /**
+//  * Retrieves the current user and signed in states from the GoogleAuth
+//  * object.
+//  */
+// var refreshValues = function() {
+//   if (auth2){
+//     console.log('Refreshing values...');
+
+//     googleUser = auth2.currentUser.get();
+
+//     document.getElementById('curr-user-cell').innerText =
+//       JSON.stringify(googleUser, undefined, 2);
+//     document.getElementById('signed-in-cell').innerText =
+//       auth2.isSignedIn.get();
+
+//     updateGoogleUser();
+//   }
+// }
+>>>>>>> 7e7e053c2262e43493a6a89faf83b630650d6481
   
 
   // Initialize Firebase
@@ -137,13 +321,16 @@ $(document).ready(function() {
 
     }
 
-
-
     function failure() {    
+
         console.log("Failed to get location");
+
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
+
+
+    //ROULETTE WHEEL
     // Diplays Roulette SVG
     var rouletteSvg = $(".svg").removeClass("hidden");
 
@@ -158,8 +345,6 @@ $(document).ready(function() {
         $("#Layer_1").velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
     });
 
-
-
     function initialize() {
         var latLng = new google.maps.LatLng({ location_latitude }, { location_longitude });
         map = new google.maps.Map(document.getElementById('map'), {
@@ -167,14 +352,14 @@ $(document).ready(function() {
             center: latLng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-    };  
 
-
-
-
+    };
 
     // SPINNG THE WHEEL FUNCTIONS
     $(".spin").on("click", function(spin) {
+
+        var zQueryUrl = "https://developers.zomato.com/api/v2.1/search?";
+        zQueryUrl += "count=20&lat=myLocation.latitude&lon=myLocation.longitude&cuisines=1%2C6&sort=cost&order=desc";
 
         //setup our remote url with appropriate arguments for long and lat
         var zQueryUrl  = "https://developers.zomato.com/api/v2.1/search?";
@@ -206,8 +391,10 @@ $(document).ready(function() {
         console.log("printing cselections");
         console.log(cSelections);
 
+
 	    console.log("location long: " + myLocation.longitude);
 	    console.log("location lat: " + myLocation.latitude);
+
         console.log(zQueryUrl);
         $.ajax({
                 url: zQueryUrl,
@@ -221,11 +408,14 @@ $(document).ready(function() {
                 //Assign reponse restaurants array to venues to simplify naming
                 var venues = response.restaurants;
 
+
                 //iterate venues array for individual restaurants
                 //ok iteration with a for loop was awesome for showing all the location...
                 //but... we want to pick just one... at random even. so...
+
                 var i = Math.floor((Math.random() * venues.length)); 
                 
+
                 //for (i = 0; i < venues.length; i++) {
                 //console.log(venues[i].restaurant.location);
                 //var location = venues[i].restaurant.location;
@@ -259,7 +449,15 @@ $(document).ready(function() {
                 //}
                 // google.maps.event.addDomListener(window, 'load', initialize);
 
-            });
 
+
+
+                //}
+
+
+
+
+            });
     });
 });
+
