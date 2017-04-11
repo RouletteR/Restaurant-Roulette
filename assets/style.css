@@ -29,6 +29,7 @@ body {
 	background-image: url("6908618719_458251121f_o.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
+	background-size: cover;
     height: 100%;
     width: 100%;
     margin: 0;
@@ -89,5 +90,9 @@ label {
 
 [type="checkbox"]+label {
 	height: 40px;
+}
+
+.bodyContent {
+	font-weight: bold; 
 }
 

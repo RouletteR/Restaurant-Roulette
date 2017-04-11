@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-
-
     function renderButton() {
 
         gapi.signin2.render('my-signin2', {
@@ -53,6 +51,7 @@ $(document).ready(function() {
     };
 
 
+
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
@@ -63,6 +62,7 @@ $(document).ready(function() {
         messagingSenderId: "1096863395822"
     };
     firebase.initializeApp(config);
+
 
 
     var map;
@@ -87,6 +87,8 @@ $(document).ready(function() {
         supportsNav = false;
     }
 
+
+    // ZOMATO API TOKEN
     var zomatoToken = "d42b7e77b526d7fac0fbd3cdb6d93ab6";
     var zCities = "";
     var zCuisines = "";
@@ -188,6 +190,7 @@ $(document).ready(function() {
     }
 
     function failure() {
+
         console.log("Failed to get location");
 
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
@@ -215,14 +218,14 @@ $(document).ready(function() {
     function initialize() {
         var latLng = new google.maps.LatLng({ location_latitude }, { location_longitude });
         map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 16,
+            zoom: 4,
             center: latLng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
     };
 
-    // ZOMATO API
+    // SPINNG THE WHEEL FUNCTIONS
     $(".spin").on("click", function(spin) {
 
         var zQueryUrl = "https://developers.zomato.com/api/v2.1/search?";
@@ -257,8 +260,11 @@ $(document).ready(function() {
 
         console.log("printing cselections");
         console.log(cSelections);
+
+
         console.log("location long: " + myLocation.longitude);
         console.log("location lat: " + myLocation.latitude);
+
         console.log(zQueryUrl);
         $.ajax({
                 url: zQueryUrl,
@@ -276,6 +282,7 @@ $(document).ready(function() {
                 //iterate venues array for individual restaurants
                 //ok iteration with a for loop was awesome for showing all the location...
                 //but... we want to pick just one... at random even. so...
+
                 var i = Math.floor((Math.random() * venues.length));
 
 
@@ -285,16 +292,55 @@ $(document).ready(function() {
 
                 var lati = parseFloat(venues[i].restaurant.location.latitude);
                 var longi = parseFloat(venues[i].restaurant.location.longitude);
+
+
                 var resTitle = "<a href=\"" + venues[i].restaurant.url + "\">";
-                resTitle += venues[i].restaurant.name;
-                resTitle += "</a>";
+                    resTitle += venues[i].restaurant.name;
+                    resTitle += "</a>";
+
+                var resAddress = "<a href=\"" + venues[i].restaurant.url + "\"";
+                    resAddress += venues[i].restaurant.location.address;
+                    resAddress += "</a>";
+
+                var resPhone = "<a href=\"" + venues[i].restaurant.phone_numbers + "\"";
+                    resPhone += venues[i].restaurant.phone_numbers;
+                    resPhone += "</a>";
+
+                var resRating = "<a href=\"" + venues[i].restaurant.user_rating.aggregate_rating + "\"";
+                    resRating += venues[i].restaurant.user_rating.aggregate_rating;
+                    resRating += "</a>";
+
+                var resCost = "<a href=\"" + venues[i].restaurant.url + "\"";
+                    resCost += venues[i].restaurant.average_cost_for_two;
+                    resCost += "</a>";
 
                 console.log(venues[i].restaurant);
+                console.log(venues[i].restaurant.phone_numbers);
+
+                // this string is designed to populate the balloon over the google maps marker
+                var contentString = '<div id="content">' +
+                    '<div id="siteNotice">' +
+                    '</div>' +
+                    '<div id="bodyContent">' +
+                    venues[i].restaurant.name + '<br>' +
+                    venues[i].restaurant.location.address + '<br>' +
+                    venues[i].restaurant.phone_numbers + '<br>' +
+                    'Average user rating on a 1 to 5 scale ' + venues[i].restaurant.user_rating.aggregate_rating + '<br>' +
+                    'Average cost for two $' + venues[i].restaurant.average_cost_for_two + 
+                    '</div>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
 
                 var marker = new google.maps.Marker({
                     position: { lat: lati, lng: longi },
                     map: map,
                     title: venues[i].restaurant.name,
+                });
+                marker.addListener('click', function() {
+                    infowindow.open(map, marker);
                 });
 
                 //push thumbtack to google map... we prob should recenter
