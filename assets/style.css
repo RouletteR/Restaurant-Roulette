@@ -6,7 +6,7 @@
 }
 
 .brand-logo {
-	margin-left: 510px;
+	
 }
 
 #map {
@@ -17,7 +17,8 @@
 
 html,
 body {
-	background-image: url("burger.jpg");
+	background-image: url("6908618719_458251121f_o.jpg");
+	background-size: 800px;
 	background-repeat: no-repeat;
 	background-size: cover;
     height: 100%;
@@ -26,6 +27,7 @@ body {
     padding: 0;
 }
 .nav-wrapper{
+	height: 80px;
 	padding: 7px;
 	background-color: rgba(0,104,55,1);
 }
@@ -62,11 +64,9 @@ body {
 	padding: 5px;
 }
 
-input {
-	width: 13px;
-	height: 13px;
-	padding: 0;
-	margin: 0;
+.input-field {
+	padding: 10px;
+	margin: auto;
 	
 
 }
