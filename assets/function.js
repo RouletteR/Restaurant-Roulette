@@ -53,141 +53,16 @@ $(document).ready(function() {
     };
 
 
-
-
-
-// function onSignIn(googleUser) {
-//   var profile = googleUser.getBasicProfile();
-//   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-//   console.log('Name: ' + profile.getName());
-//   console.log('Image URL: ' + profile.getImageUrl());
-//   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-// }
-
-// function signOut() {
-//     var auth2 = gapi.auth2.getAuthInstance();
-//     auth2.signOut().then(function () {
-//       console.log('User signed out.');
-//     });
-//   }
-
-
-// function renderButton() {
-
-//  gapi.signin2.render('my-signin2', {
-//  'scope': 'profile email',
-//   'width': 240,
-//   'height': 50,
-//     'longtitle': true,
-//   'theme': 'dark',
-//    'onsuccess': onSuccess,
-//    'onfailure': onFailure
-// });
-
-// var auth2; // The Sign-In object.
-// var googleUser; // The current user.
-
-// /**
-//  * Calls startAuth after Sign in V2 finishes setting up.
-//  */
-// var appStart = function() {
-//   gapi.load('auth2', initSigninV2);
-// };
-
-// /**
-//  * Initializes Signin v2 and sets up listeners.
-//  */
-// var initSigninV2 = function() {
-//   auth2 = gapi.auth2.init({
-//       client_id: '1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com',
-//       scope: 'profile'
-//   });
-
-//   // Listen for sign-in state changes.
-//   auth2.isSignedIn.listen(signinChanged);
-
-//   // Listen for changes to current user.
-//   auth2.currentUser.listen(userChanged);
-
-//   // Sign in the user if they are currently signed in.
-//   if (auth2.isSignedIn.get() == true) {
-//     auth2.signIn();
-//   }
-
-//   // Start with the current live values.
-//   refreshValues();
-// };
-
-// *
-//  * Listener method for sign-out live value.
-//  *
-//  * @param {boolean} val the updated signed out state.
- 
-// var signinChanged = function (val) {
-//   console.log('Signin state changed to ', val);
-//   document.getElementById('signed-in-cell').innerText = val;
-// };
-
-// /**
-//  * Listener method for when the user changes.
-//  *
-//  * @param {GoogleUser} user the updated user.
-//  */
-// var userChanged = function (user) {
-//   console.log('User now: ', user);
-//   googleUser = user;
-//   updateGoogleUser();
-//   document.getElementById('curr-user-cell').innerText =
-//     JSON.stringify(user, undefined, 2);
-// };
-
-// /**
-//  * Updates the properties in the Google User table using the current user.
-//  */
-// var updateGoogleUser = function () {
-//   if (googleUser) {
-//     document.getElementById('user-id').innerText = googleUser.getId();
-//     document.getElementById('user-scopes').innerText =
-//       googleUser.getGrantedScopes();
-//     document.getElementById('auth-response').innerText =
-//       JSON.stringify(googleUser.getAuthResponse(), undefined, 2);
-//   } else {
-//     document.getElementById('user-id').innerText = '--';
-//     document.getElementById('user-scopes').innerText = '--';
-//     document.getElementById('auth-response').innerText = '--';
-//   }
-// };
-
-// /**
-//  * Retrieves the current user and signed in states from the GoogleAuth
-//  * object.
-//  */
-// var refreshValues = function() {
-//   if (auth2){
-//     console.log('Refreshing values...');
-
-//     googleUser = auth2.currentUser.get();
-
-//     document.getElementById('curr-user-cell').innerText =
-//       JSON.stringify(googleUser, undefined, 2);
-//     document.getElementById('signed-in-cell').innerText =
-//       auth2.isSignedIn.get();
-
-//     updateGoogleUser();
-//   }
-// }
-  
-
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
-    authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
-    databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
-    projectId: "restaurantroulet-1491174705978",
-    storageBucket: "restaurantroulet-1491174705978.appspot.com",
-    messagingSenderId: "1096863395822"
-  };
-  firebase.initializeApp(config);
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
+        authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
+        databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
+        projectId: "restaurantroulet-1491174705978",
+        storageBucket: "restaurantroulet-1491174705978.appspot.com",
+        messagingSenderId: "1096863395822"
+    };
+    firebase.initializeApp(config);
 
 
     var map;
@@ -332,7 +207,9 @@ $(document).ready(function() {
     //Spin Wheel
     $(".spin").on("click", function() {
         var rotation = Math.floor(Math.random() * (1440 - 360) + 360);
-        $("#Layer_1").velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
+        $("#Layer_1").velocity({ rotateZ:  rotation }, { duration: 3000, easing: "linear", loop: false })
+        //$("#Layer_1").velocity({ opacity: 0 }, { display: "none" }, {duration: 10000, easing: "linear"});
+        .velocity({ rotateY: ["-180deg",0]},{duration: 3000, loop: 0.5});
     });
 
     function initialize() {
@@ -446,4 +323,3 @@ $(document).ready(function() {
             });
     });
 });
-
