@@ -6,25 +6,31 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
     <link rel="stylesheet" href="assets/style.css">
+    <!--     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+ -->
+    <!-- <meta name="google-signin-client_id" content="1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com"> -->
     <title>Restaurant Roullete</title>
 </head>
 
 <body>
     <div class="container" id="container1">
-        <div class="nav-wrapper center">
+        <div class="nav-wrapper">
             <!-- roulette logo -->
             <a href="#" class="brand-logo"><img src="assets/images/rouletter-logo.svg"></a>
             <ul class="right">
-                <!-- zip code box -->
-                <!--    <div class="input-field location">
-                        <input type="search" placeholder="Town or Zip Code">
-                    </div> -->
-                </li>
                 <li>
-                    <a class="dropdown-button" href="#" data-activates="dropdown1"><img class="material-icons icon" src="assets/images/fork-knife.svg" /></a>
+                    <!-- zip code box -->
+                    <div class="input-field location">
+                        <input type="search" placeholder="Town or Zip Code">
+                    </div>
+                </li>
+                <!-- google sign in -->
+                <!--  <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+                <a class="waves-effect waves-light btn"><i class="material-icons left">navigation</i>button</a>
+                <li><a class="dropdown-button btn" href="#" data-activates='dropdown1'>Cuisine</a>
                     <ul id="dropdown1" class="dropdown-content">
                         <div class="cuisine-cats">
-                            <!--this div should be populated by categories returned from an api call to zomato for the proper matching ids-->
+                            <!-- this div should be populated by categories returned from an api call to zomato for the proper matching ids -->
                         </div>
                     </ul>
                 </li>
@@ -32,6 +38,7 @@
         </div>
     </div>
     <div class="row">
+
         <div class="col s4" id="wheel">
             <!-- <div class="col s12"> -->
             <a class="svg-container spin"></a>
@@ -45,25 +52,16 @@
     		<input class="button" id="hide" type=button value="Delete Markers">
     	</div>
     </div>
-    </div>
+  
+
     <div id="map"></div>
-    <footer class="page-footer">
-        <div class="container">
-            <ul class="right">
-            </ul>
-            <!--    <div class="footer-copyright">
-            <div class="container">
-                ABCDEFG
-            </div>
-        </div> -->
-        </div>
-    </footer>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
     <!-- Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- VelocityJS -->
     <script type="text/javascript" src="assets/velocity.min.js"></script>
     <script src="assets/function.js"></script>
@@ -74,7 +72,7 @@
 <div class="svg hidden">
     <?xml version="1.0" encoding="utf-8"?>
     <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="100px" y="100px" width="200px" height="200px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px" height="200px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
         <path d="M199.443,99.812c0,0.119,0,0.238,0,0.357c0,10.681-1.686,20.966-4.815,30.618h-0.021l-94.251-30.618l1.031-0.337h97.344
     L199.443,99.812z" />
         <path fill="#FF0000" d="M199.443,99.812l-0.713,0.02h-97.344l93.221-30.281h0.021C197.721,79.083,199.404,89.249,199.443,99.812z" />
