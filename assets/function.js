@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
@@ -12,7 +13,6 @@ $(document).ready(function() {
     firebase.initializeApp(config);
 
 
-
     var map;
     var venues = {};
     var myLocation = {
@@ -20,6 +20,7 @@ $(document).ready(function() {
         longitude: 0
     };
     var supportsNav = true;
+
 
     //var cuisine = document.getElementById("cuisine-topics")
 
@@ -34,6 +35,8 @@ $(document).ready(function() {
         console.log("No support for nav coord");
         supportsNav = false;
     }
+
+
 
 
     // ZOMATO API TOKEN
@@ -118,6 +121,11 @@ $(document).ready(function() {
         });
         marker.addListener('load', toggleBounce);
 
+
+
+
+
+
         function toggleBounce() {
             if (marker.getAnimation() !== null) {
                 marker.setAnimation(null);
@@ -137,6 +145,8 @@ $(document).ready(function() {
 
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
+
+
 
 
 
@@ -216,6 +226,7 @@ $(document).ready(function() {
                 method: "GET",
                 dataType: "json",
             })
+
             .done(function(response) {
                 //Assign reponse restaurants array to venues to simplify naming
                 var venues = response.restaurants;
@@ -287,6 +298,8 @@ $(document).ready(function() {
                     infowindow.open(map, marker);
                 });
 
+
+
                 //push thumbtack to google map... we prob should recenter
                 //the map view to the new location.
                 marker.setMap(map);
@@ -301,20 +314,17 @@ $(document).ready(function() {
                     map.panTo(marker.getPosition());
                 }
 
+                $("#hide").on("click", function() {
+                    marker.setMap(null);
+
+                });
+
                 //where did we put it?
                 console.log(marker.setPosition);
-                //}
-                //}
-                // google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
-
-                //}
-
-
-
+                
 
             });
+
+
     });
 });
