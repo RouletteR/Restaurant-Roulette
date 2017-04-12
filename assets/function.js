@@ -257,9 +257,9 @@ $(document).ready(function() {
                     resAddress += "</a>";
 
 
-                var resPhone = "<a href=\"" + venues[i].restaurant.phone_numbers + "\"";
-                    resPhone += venues[i].restaurant.phone_numbers;
-                    resPhone += "</a>";
+                // var resPhone = "<a href=\"" + venues[i].restaurant.phone_numbers + "\"";
+                //     resPhone += venues[i].restaurant.phone_numbers;
+                //     resPhone += "</a>";
 
                 var resRating = "<a href=\"" + venues[i].restaurant.user_rating.aggregate_rating + "\"";
                     resRating += venues[i].restaurant.user_rating.aggregate_rating;
@@ -270,7 +270,7 @@ $(document).ready(function() {
                     resCost += "</a>";
 
                 console.log(venues[i].restaurant);
-                console.log(venues[i].restaurant.phone_numbers);
+                // console.log(venues[i].restaurant.phone_numbers);
 
                 // this string is designed to populate the balloon over the google maps marker
                 var contentString = '<div id="content">' +
@@ -279,8 +279,7 @@ $(document).ready(function() {
                     '<div id="bodyContent">' +
                     venues[i].restaurant.name + '<br>' +
                     venues[i].restaurant.location.address + '<br>' +
-                    venues[i].restaurant.phone_numbers + '<br>' +
-                    'Average user rating on a 1 to 5 scale ' + venues[i].restaurant.user_rating.aggregate_rating + '<br>' +
+                   'Average user rating on a 1 to 5 scale ' + venues[i].restaurant.user_rating.aggregate_rating + '<br>' +
                     'Average cost for two $' + venues[i].restaurant.average_cost_for_two +
                     '</div>';
 
@@ -313,6 +312,10 @@ $(document).ready(function() {
                 if (!map.getBounds().contains(marker.getPosition())) {
                     map.panTo(marker.getPosition());
                 }
+
+                $("button#nav").on("click", function() {
+                    window.location.href='https://www.google.com/maps/dir/' + myLocation.latitude + "," + myLocation.longitude + "/" + venues[i].restaurant.location.address;   
+                })
 
                 $("#hide").on("click", function() {
                     marker.setMap(null);
