@@ -144,7 +144,7 @@ $(document).ready(function() {
     // Diplays Roulette SVG
     var rouletteSvg = $(".svg").removeClass("hidden");
 
-    $("#wheel").prepend(rouletteSvg);
+    $("#wheel").append(rouletteSvg);
 
     $('.dropdown-button').dropdown('closed');
     $(".svg-container").prepend(rouletteSvg);
@@ -236,25 +236,27 @@ $(document).ready(function() {
                 var longi = parseFloat(venues[i].restaurant.location.longitude);
 
 
+
                 var resTitle = "<a href=\"" + venues[i].restaurant.url + "\">";
-                resTitle += venues[i].restaurant.name;
-                resTitle += "</a>";
+                    resTitle += venues[i].restaurant.name;
+                    resTitle += "</a>";
 
                 var resAddress = "<a href=\"" + venues[i].restaurant.url + "\"";
-                resAddress += venues[i].restaurant.location.address;
-                resAddress += "</a>";
+                    resAddress += venues[i].restaurant.location.address;
+                    resAddress += "</a>";
 
-                var resPhone = "<a href=\"" + venues[i].restaurant.url + "\"";
-                resPhone += venues[i].restaurant.phone_numbers;
-                resPhone += "</a>";
 
-                var resRating = "<a href=\"" + venues[i].restaurant.url + "\"";
-                resRating += venues[i].restaurant.user_rating.aggregate_rating;
-                resRating += "</a>";
+                var resPhone = "<a href=\"" + venues[i].restaurant.phone_numbers + "\"";
+                    resPhone += venues[i].restaurant.phone_numbers;
+                    resPhone += "</a>";
+
+                var resRating = "<a href=\"" + venues[i].restaurant.user_rating.aggregate_rating + "\"";
+                    resRating += venues[i].restaurant.user_rating.aggregate_rating;
+                    resRating += "</a>";
 
                 var resCost = "<a href=\"" + venues[i].restaurant.url + "\"";
-                resCost += venues[i].restaurant.average_cost_for_two;
-                resCost += "</a>";
+                    resCost += venues[i].restaurant.average_cost_for_two;
+                    resCost += "</a>";
 
                 console.log(venues[i].restaurant);
                 console.log(venues[i].restaurant.phone_numbers);
