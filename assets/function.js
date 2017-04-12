@@ -1,56 +1,5 @@
 $(document).ready(function() {
 
-    function renderButton() {
-
-        gapi.signin2.render('my-signin2', {
-            'scope': 'profile email',
-            'width': 240,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSuccess,
-            'onfailure': onFailure
-        });
-    }
-
-    /**
-     * The Sign-In client object.
-     */
-    var auth2;
-
-    /**
-     * Initializes the Sign-In client.
-     */
-    var initClient = function() {
-        gapi.load('auth2', function() {
-            /**
-             * Retrieve the singleton for the GoogleAuth library and set up the
-             * client.
-             */
-            auth2 = gapi.auth2.init({
-                client_id: '1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com'
-            });
-
-            // Attach the click handler to the sign-in button
-            auth2.attachClickHandler('signin-button', {}, onSuccess, onFailure);
-        });
-    };
-
-    /**
-     * Handle successful sign-ins.
-     */
-    var onSuccess = function(user) {
-        console.log('Signed in as ' + user.getBasicProfile().getName());
-    };
-
-    /**
-     * Handle sign-in failures.
-     */
-    var onFailure = function(error) {
-        console.log(error);
-    };
-
-
 
     // Initialize Firebase
     var config = {
@@ -202,7 +151,7 @@ $(document).ready(function() {
     // Diplays Roulette SVG
     var rouletteSvg = $(".svg").removeClass("hidden");
 
-    $("#wheel").prepend(rouletteSvg);
+    $("#wheel").append(rouletteSvg);
 
     $('.dropdown-button').dropdown('closed');
     $(".svg-container").prepend(rouletteSvg);
@@ -210,9 +159,9 @@ $(document).ready(function() {
     //Spin Wheel
     $(".spin").on("click", function() {
         var rotation = Math.floor(Math.random() * (1440 - 360) + 360);
-        $("#Layer_1").velocity({ rotateZ:  rotation }, { duration: 3000, easing: "linear", loop: false })
-        //$("#Layer_1").velocity({ opacity: 0 }, { display: "none" }, {duration: 10000, easing: "linear"});
-        .velocity({ rotateY: ["-180deg",0]},{duration: 3000, loop: 0.5});
+        $("#Layer_1").velocity({ rotateZ: rotation }, { duration: 3000, easing: "linear", loop: false })
+            //$("#Layer_1").velocity({ opacity: 0 }, { display: "none" }, {duration: 10000, easing: "linear"});
+            .velocity({ rotateY: ["-180deg", 0] }, { duration: 3000, loop: 0.5 });
     });
 
     function initialize() {
@@ -294,25 +243,25 @@ $(document).ready(function() {
                 var longi = parseFloat(venues[i].restaurant.location.longitude);
 
 
-                var resTitle = "<a href=\"" + venues[i].restaurant.url + "\">";
-                    resTitle += venues[i].restaurant.name;
-                    resTitle += "</a>";
+                var resTitle = "<a class=\"res-title\" href=\"" + venues[i].restaurant.url + "\">";
+                resTitle += venues[i].restaurant.name;
+                resTitle += "</a>";
 
                 var resAddress = "<a href=\"" + venues[i].restaurant.url + "\"";
-                    resAddress += venues[i].restaurant.location.address;
-                    resAddress += "</a>";
+                resAddress += venues[i].restaurant.location.address;
+                resAddress += "</a>";
 
                 var resPhone = "<a href=\"" + venues[i].restaurant.phone_numbers + "\"";
-                    resPhone += venues[i].restaurant.phone_numbers;
-                    resPhone += "</a>";
+                resPhone += venues[i].restaurant.phone_numbers;
+                resPhone += "</a>";
 
                 var resRating = "<a href=\"" + venues[i].restaurant.user_rating.aggregate_rating + "\"";
-                    resRating += venues[i].restaurant.user_rating.aggregate_rating;
-                    resRating += "</a>";
+                resRating += venues[i].restaurant.user_rating.aggregate_rating;
+                resRating += "</a>";
 
                 var resCost = "<a href=\"" + venues[i].restaurant.url + "\"";
-                    resCost += venues[i].restaurant.average_cost_for_two;
-                    resCost += "</a>";
+                resCost += venues[i].restaurant.average_cost_for_two;
+                resCost += "</a>";
 
                 console.log(venues[i].restaurant);
                 console.log(venues[i].restaurant.phone_numbers);
@@ -326,7 +275,7 @@ $(document).ready(function() {
                     venues[i].restaurant.location.address + '<br>' +
                     venues[i].restaurant.phone_numbers + '<br>' +
                     'Average user rating on a 1 to 5 scale ' + venues[i].restaurant.user_rating.aggregate_rating + '<br>' +
-                    'Average cost for two $' + venues[i].restaurant.average_cost_for_two + 
+                    'Average cost for two $' + venues[i].restaurant.average_cost_for_two +
                     '</div>';
 
                 var infowindow = new google.maps.InfoWindow({
