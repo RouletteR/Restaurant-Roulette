@@ -134,12 +134,6 @@ $(document).ready(function() {
             }
         }
 
-        // var request = {
-        //     location: coords,
-        //     radius: '500'
-
-        // };
-
         myLocation.latitude = myLat;
         myLocation.longitude = myLong;
 
@@ -186,8 +180,8 @@ $(document).ready(function() {
     // SPINNG THE WHEEL FUNCTIONS
     $(".spin").on("click", function(spin) {
 
-        var zQueryUrl = "https://developers.zomato.com/api/v2.1/search?";
-        zQueryUrl += "count=20&lat=myLocation.latitude&lon=myLocation.longitude&cuisines=1%2C6&sort=cost&order=desc";
+        // var zQueryUrl = "https://developers.zomato.com/api/v2.1/search?";
+        // zQueryUrl += "count=20&lat=myLocation.latitude&lon=myLocation.longitude&cuisines=1%2C6&sort=cost&order=desc";
 
         //setup our remote url with appropriate arguments for long and lat
         var zQueryUrl = "https://developers.zomato.com/api/v2.1/search?";
@@ -236,8 +230,8 @@ $(document).ready(function() {
             .done(function(response) {
                 //Assign reponse restaurants array to venues to simplify naming
                 var venues = response.restaurants;
-
-
+                console.log(venues);
+                
                 //iterate venues array for individual restaurants
                 //ok iteration with a for loop was awesome for showing all the location...
                 //but... we want to pick just one... at random even. so...
@@ -253,25 +247,27 @@ $(document).ready(function() {
                 var longi = parseFloat(venues[i].restaurant.location.longitude);
 
 
-                var resTitle = "<a class=\"res-title\" href=\"" + venues[i].restaurant.url + "\">";
-                resTitle += venues[i].restaurant.name;
-                resTitle += "</a>";
+
+                var resTitle = "<a href=\"" + venues[i].restaurant.url + "\">";
+                    resTitle += venues[i].restaurant.name;
+                    resTitle += "</a>";
 
                 var resAddress = "<a href=\"" + venues[i].restaurant.url + "\"";
-                resAddress += venues[i].restaurant.location.address;
-                resAddress += "</a>";
+                    resAddress += venues[i].restaurant.location.address;
+                    resAddress += "</a>";
+
 
                 var resPhone = "<a href=\"" + venues[i].restaurant.phone_numbers + "\"";
-                resPhone += venues[i].restaurant.phone_numbers;
-                resPhone += "</a>";
+                    resPhone += venues[i].restaurant.phone_numbers;
+                    resPhone += "</a>";
 
                 var resRating = "<a href=\"" + venues[i].restaurant.user_rating.aggregate_rating + "\"";
-                resRating += venues[i].restaurant.user_rating.aggregate_rating;
-                resRating += "</a>";
+                    resRating += venues[i].restaurant.user_rating.aggregate_rating;
+                    resRating += "</a>";
 
                 var resCost = "<a href=\"" + venues[i].restaurant.url + "\"";
-                resCost += venues[i].restaurant.average_cost_for_two;
-                resCost += "</a>";
+                    resCost += venues[i].restaurant.average_cost_for_two;
+                    resCost += "</a>";
 
                 console.log(venues[i].restaurant);
                 console.log(venues[i].restaurant.phone_numbers);
@@ -308,7 +304,12 @@ $(document).ready(function() {
                 //the map view to the new location.
                 marker.setMap(map);
 
-                //recenter to include the new location
+
+                // var bounds = new google.maps.LatLngBounds();
+
+                // bounds.extend(marker.getPosition);
+                // map.fitBounds(bounds);
+                // recenter to include the new location
                 if (!map.getBounds().contains(marker.getPosition())) {
                     map.panTo(marker.getPosition());
                 }
