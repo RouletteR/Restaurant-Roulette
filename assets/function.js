@@ -1,57 +1,5 @@
 $(document).ready(function() {
 
-    function renderButton() {
-
-        gapi.signin2.render('my-signin2', {
-            'scope': 'profile email',
-            'width': 240,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSuccess,
-            'onfailure': onFailure
-        });
-    }
-
-    /**
-     * The Sign-In client object.
-     */
-    var auth2;
-
-    /**
-     * Initializes the Sign-In client.
-     */
-    var initClient = function() {
-        gapi.load('auth2', function() {
-            /**
-             * Retrieve the singleton for the GoogleAuth library and set up the
-             * client.
-             */
-            auth2 = gapi.auth2.init({
-                client_id: '1096863395822-vafo1gdin0ml7q70hrerlirdtn4g178u.apps.googleusercontent.com'
-            });
-
-            // Attach the click handler to the sign-in button
-            auth2.attachClickHandler('signin-button', {}, onSuccess, onFailure);
-        });
-    };
-
-    /**
-     * Handle successful sign-ins.
-     */
-    var onSuccess = function(user) {
-        console.log('Signed in as ' + user.getBasicProfile().getName());
-    };
-
-    /**
-     * Handle sign-in failures.
-     */
-    var onFailure = function(error) {
-        console.log(error);
-    };
-
-
-
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
