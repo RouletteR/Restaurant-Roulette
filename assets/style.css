@@ -6,25 +6,37 @@
 }
 
 .brand-logo {
-	margin-left: 510px;
+	
 }
 
 #map {
+	background-color: rgba(0,104,55,1);
+	border-style: solid;
+	border-width: 0px;
+	border-top-width: 8px;
+	/*-moz-border-image: -moz-linear-gradient(to left, rgba(234,190,129,1), rgba(192,131,41,1),rgba(234,232,217,1), rgba(207,238,137,1));
+	-webkit-border-image: -webkit-linear-gradient(to left, rgba(234,190,129,1), rgba(192,131,41,1),rgba(234,232,217,1), rgba(207,238,137,1));*/
+	border-image: linear-gradient(to left, rgba(234,190,129,1), rgba(192,131,41,1),rgba(244,232,217,1), rgba(237,208,137,1));
+	border-image-slice: 1;
 	margin: auto;
 	width: 100%;
-    height: 300px;
+    height: 100%
+
 }
 
 html,
 body {
 	background-image: url("6908618719_458251121f_o.jpg");
+	background-size: cover;
 	background-repeat: no-repeat;
+	background-size: cover;
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
 }
 .nav-wrapper{
+	height: 80px;
 	padding: 7px;
 	background-color: rgba(0,104,55,1);
 }
@@ -44,10 +56,11 @@ body {
 }
 .svg{
 	margin: auto;
-	width:80%;
-	height:80%;
+	width:40%;
+	height:40%;
 }
 .svg-container{
+	z-index: 1;
 	padding: 20px;
 }
 
@@ -61,11 +74,9 @@ body {
 	padding: 5px;
 }
 
-input {
-	width: 13px;
-	height: 13px;
-	padding: 0;
-	margin: 0;
+.input-field {
+	padding: 10px;
+	margin: auto;
 	
 
 }
@@ -79,5 +90,9 @@ label {
 
 [type="checkbox"]+label {
 	height: 40px;
+}
+
+.bodyContent {
+	font-weight: bold; 
 }
 
