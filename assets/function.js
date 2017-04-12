@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
    
    // Initialize Firebase
   var config = {
@@ -20,6 +21,7 @@ $(document).ready(function() {
     };
     var supportsNav = true;
 
+    
     //var cuisine = document.getElementById("cuisine-topics")
 
     //create object for navigator if its enabled for this user
@@ -33,6 +35,8 @@ $(document).ready(function() {
         console.log("No support for nav coord");
         supportsNav = false;
     }
+
+
 
 
     // ZOMATO API TOKEN
@@ -117,6 +121,11 @@ $(document).ready(function() {
         });
         marker.addListener('load', toggleBounce);
 
+        
+
+
+      
+
         function toggleBounce() {
             if (marker.getAnimation() !== null) {
                 marker.setAnimation(null);
@@ -143,6 +152,8 @@ $(document).ready(function() {
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
+    
+
 
 
     //ROULETTE WHEEL
@@ -157,7 +168,9 @@ $(document).ready(function() {
     //Spin Wheel
     $(".spin").on("click", function() {
         var rotation = Math.floor(Math.random() * (1440 - 360) + 360);
-        $("#Layer_1").velocity({ rotateZ: "+=" + rotation }, { duration: 3000, easing: "linear", loop: false });
+        $("#Layer_1").velocity({ rotateZ:  rotation }, { duration: 3000, easing: "linear", loop: false })
+        //$("#Layer_1").velocity({ opacity: 0 }, { display: "none" }, {duration: 10000, easing: "linear"});
+        .velocity({ rotateY: ["-180deg",0]},{duration: 3000, loop: 0.5});
     });
 
     function initialize() {
@@ -288,6 +301,8 @@ $(document).ready(function() {
                     infowindow.open(map, marker);
                 });
 
+
+
                 //push thumbtack to google map... we prob should recenter
                 //the map view to the new location.
                 marker.setMap(map);
@@ -296,6 +311,11 @@ $(document).ready(function() {
                 if (!map.getBounds().contains(marker.getPosition())) {
                     map.panTo(marker.getPosition());
                 }
+
+                $("#hide").on("click",function(){ 
+        			marker.setMap(null);
+        
+       		    });	
 
                 //where did we put it?
                 console.log(marker.setPosition);
@@ -308,9 +328,9 @@ $(document).ready(function() {
 
                 //}
 
-
+                });
 
 
             });
     });
-});
+
