@@ -1,18 +1,18 @@
 $(document).ready(function() {
 
-   
-   // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
-    authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
-    databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
-    projectId: "restaurantroulet-1491174705978",
-    storageBucket: "restaurantroulet-1491174705978.appspot.com",
-    messagingSenderId: "1096863395822"
-  };
-  firebase.initializeApp(config);
 
-    
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
+        authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
+        databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
+        projectId: "restaurantroulet-1491174705978",
+        storageBucket: "restaurantroulet-1491174705978.appspot.com",
+        messagingSenderId: "1096863395822"
+    };
+    firebase.initializeApp(config);
+
+
     var map;
     var venues = {};
     var myLocation = {
@@ -21,7 +21,7 @@ $(document).ready(function() {
     };
     var supportsNav = true;
 
-    
+
     //var cuisine = document.getElementById("cuisine-topics")
 
     //create object for navigator if its enabled for this user
@@ -121,10 +121,10 @@ $(document).ready(function() {
         });
         marker.addListener('load', toggleBounce);
 
-        
 
 
-      
+
+
 
         function toggleBounce() {
             if (marker.getAnimation() !== null) {
@@ -152,7 +152,7 @@ $(document).ready(function() {
         $('#lat').html("<p>It didnt't work, co-ordinates not available!</p>");
     }
 
-    
+
 
 
 
@@ -160,7 +160,7 @@ $(document).ready(function() {
     // Diplays Roulette SVG
     var rouletteSvg = $(".svg").removeClass("hidden");
 
-    $("#wheel").prepend(rouletteSvg);
+    $("#wheel").append(rouletteSvg);
 
     $('.dropdown-button').dropdown('closed');
     $(".svg-container").prepend(rouletteSvg);
@@ -168,9 +168,9 @@ $(document).ready(function() {
     //Spin Wheel
     $(".spin").on("click", function() {
         var rotation = Math.floor(Math.random() * (1440 - 360) + 360);
-        $("#Layer_1").velocity({ rotateZ:  rotation }, { duration: 3000, easing: "linear", loop: false })
-        //$("#Layer_1").velocity({ opacity: 0 }, { display: "none" }, {duration: 10000, easing: "linear"});
-        .velocity({ rotateY: ["-180deg",0]},{duration: 3000, loop: 0.5});
+        $("#Layer_1").velocity({ rotateZ: rotation }, { duration: 3000, easing: "linear", loop: false })
+            //$("#Layer_1").velocity({ opacity: 0 }, { display: "none" }, {duration: 10000, easing: "linear"});
+            .velocity({ rotateY: ["-180deg", 0] }, { duration: 3000, loop: 0.5 });
     });
 
     function initialize() {
@@ -232,6 +232,7 @@ $(document).ready(function() {
                 method: "GET",
                 dataType: "json",
             })
+
             .done(function(response) {
                 //Assign reponse restaurants array to venues to simplify naming
                 var venues = response.restaurants;
@@ -252,25 +253,25 @@ $(document).ready(function() {
                 var longi = parseFloat(venues[i].restaurant.location.longitude);
 
 
-                var resTitle = "<a href=\"" + venues[i].restaurant.url + "\">";
-                    resTitle += venues[i].restaurant.name;
-                    resTitle += "</a>";
+                var resTitle = "<a class=\"res-title\" href=\"" + venues[i].restaurant.url + "\">";
+                resTitle += venues[i].restaurant.name;
+                resTitle += "</a>";
 
                 var resAddress = "<a href=\"" + venues[i].restaurant.url + "\"";
-                    resAddress += venues[i].restaurant.location.address;
-                    resAddress += "</a>";
+                resAddress += venues[i].restaurant.location.address;
+                resAddress += "</a>";
 
                 var resPhone = "<a href=\"" + venues[i].restaurant.phone_numbers + "\"";
-                    resPhone += venues[i].restaurant.phone_numbers;
-                    resPhone += "</a>";
+                resPhone += venues[i].restaurant.phone_numbers;
+                resPhone += "</a>";
 
                 var resRating = "<a href=\"" + venues[i].restaurant.user_rating.aggregate_rating + "\"";
-                    resRating += venues[i].restaurant.user_rating.aggregate_rating;
-                    resRating += "</a>";
+                resRating += venues[i].restaurant.user_rating.aggregate_rating;
+                resRating += "</a>";
 
                 var resCost = "<a href=\"" + venues[i].restaurant.url + "\"";
-                    resCost += venues[i].restaurant.average_cost_for_two;
-                    resCost += "</a>";
+                resCost += venues[i].restaurant.average_cost_for_two;
+                resCost += "</a>";
 
                 console.log(venues[i].restaurant);
                 console.log(venues[i].restaurant.phone_numbers);
@@ -284,7 +285,7 @@ $(document).ready(function() {
                     venues[i].restaurant.location.address + '<br>' +
                     venues[i].restaurant.phone_numbers + '<br>' +
                     'Average user rating on a 1 to 5 scale ' + venues[i].restaurant.user_rating.aggregate_rating + '<br>' +
-                    'Average cost for two $' + venues[i].restaurant.average_cost_for_two + 
+                    'Average cost for two $' + venues[i].restaurant.average_cost_for_two +
                     '</div>';
 
                 var infowindow = new google.maps.InfoWindow({
@@ -312,25 +313,17 @@ $(document).ready(function() {
                     map.panTo(marker.getPosition());
                 }
 
-                $("#hide").on("click",function(){ 
-        			marker.setMap(null);
-        
-       		    });	
-
-                //where did we put it?
-                console.log(marker.setPosition);
-                //}
-                //}
-                // google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
-
-                //}
+                $("#hide").on("click", function() {
+                    marker.setMap(null);
 
                 });
 
+                //where did we put it?
+                console.log(marker.setPosition);
+                
 
             });
-    });
 
+
+    });
+});

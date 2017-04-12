@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+   
+    var config = {
+        apiKey: "AIzaSyCEHf6cYW1NSDcoZ2Jpgv4qv7yzG07LHIE",
+        authDomain: "restaurantroulet-1491174705978.firebaseapp.com",
+        databaseURL: "https://restaurantroulet-1491174705978.firebaseio.com",
+        projectId: "restaurantroulet-1491174705978",
+        storageBucket: "restaurantroulet-1491174705978.appspot.com",
+        messagingSenderId: "1096863395822"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
+    <script type="text/javascript">
+    // FirebaseUI config.
+    var uiConfig = {
+        callbacks: {
+            signInSuccess: function(currentUser, credential, redirectUrl) {
+                // Do something.
+                // Return type determines whether we continue the redirect automatically
+                // or whether we leave that to developer to handle.
+                return true;
+            },
+            uiShown: function() {
+                // The widget is rendered.
+                // Hide the loader.
+                document.getElementById('loader').style.display = 'none';
+            }
+        },
+        credentialHelper: firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM,
+        // Query parameter name for mode.
+        queryParameterForWidgetMode: 'mode',
+        // Query parameter name for sign in success url.
+        queryParameterForSignInSuccessUrl: 'rouletter.html',
+        // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+        signInFlow: 'redirect',
+        signInSuccessUrl: 'rouletter.html',
+        signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+
+            {
+                provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                // Whether the display name should be displayed in the Sign Up page.
+                requireDisplayName: true
+            }
+
+        ],
+
+    };
+
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+    <title>Train Timing</title>
+</head>
+
+<body>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+</body>
+
+</html>
