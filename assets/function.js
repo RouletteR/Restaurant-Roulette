@@ -119,11 +119,7 @@ $(document).ready(function() {
             position: coords,
             animation: google.maps.Animation.DROP
         });
-        marker.addListener('load', toggleBounce);
-
-
-
-
+        marker.addListener('click', toggleBounce);
 
 
         function toggleBounce() {
