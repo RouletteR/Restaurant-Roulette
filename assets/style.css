@@ -3,36 +3,35 @@
 }
 
 .brand-logo {
-	
-	padding: 15px;
-	margin:auto;
+    padding: 15px;
+    margin: auto;
 }
-.map-div{
+
+.map-div {
     height: 50vh;
 }
-.main-row{
+
+.main-row {
     background-image: url("images/roulette-bg.svg");
     height: 100%;
 }
+
 #map {
     background-color: rgba(0, 104, 55, 1);
     border-style: solid;
     border-width: 0px;
     border-top-width: 8px;
-    /*-moz-border-image: -moz-linear-gradient(to left, rgba(234,190,129,1), rgba(192,131,41,1),rgba(234,232,217,1), rgba(207,238,137,1));
-	-webkit-border-image: -webkit-linear-gradient(to left, rgba(234,190,129,1), rgba(192,131,41,1),rgba(234,232,217,1), rgba(207,238,137,1));*/
-	border-image: linear-gradient(to left, rgba(234,190,129,1), rgba(192,131,41,1),rgba(244,232,217,1), rgba(237,208,137,1));
-	border-image-slice: 1;
-	margin: auto;
-	width: 100%;
+    -moz-border-image: -moz-linear-gradient(to left, rgba(234, 190, 129, 1), rgba(192, 131, 41, 1), rgba(234, 232, 217, 1), rgba(207, 238, 137, 1));
+    -webkit-border-image: -webkit-linear-gradient(to left, rgba(234, 190, 129, 1), rgba(192, 131, 41, 1), rgba(234, 232, 217, 1), rgba(207, 238, 137, 1));
+    border-image: linear-gradient(to left, rgba(234, 190, 129, 1), rgba(192, 131, 41, 1), rgba(244, 232, 217, 1), rgba(237, 208, 137, 1));
+    border-image-slice: 1;
+    margin: auto;
+    width: 100%;
     height: 50vh;
 }
 
 html,
 body {
-
-    background-image: url("6908618719_458251121f_o.jpg");
-    /*background-size: cover;*/
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
@@ -40,68 +39,58 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .nav-wrapper {
     height: 80px;
     padding: 3px;
-/*    background-image: url("images/k13331662.png");
-    background-repeat: repeat-x;
-*/  border-image: linear-gradient(to left, rgba(234, 190, 129, 1), rgba(192, 131, 41, 1), rgba(244, 232, 217, 1), rgba(237, 208, 137, 1));
-	border-image-slice: 1;
-	border-style: solid;
-	border-width: 0px;
-	border-bottom-width: 3px;
+    border-image: linear-gradient(to left, rgba(234, 190, 129, 1), rgba(192, 131, 41, 1), rgba(244, 232, 217, 1), rgba(237, 208, 137, 1));
+    border-image-slice: 1;
+    border-style: solid;
+    border-width: 0px;
+    border-bottom-width: 3px;
     background-color: rgba(0, 104, 55, 1);
 }
 
-.icon{
-	width: 40px;
+.icon {
+    width: 40px;
 }
-.page-footer{
-	background-image: url("images/k13331662.png");
+
+.page-footer {
+    background-image: url("images/k13331662.png");
     background-repeat: repeat-x;
     background-repeat: repeat-x;
     border-image: linear-gradient(to left, rgba(234, 190, 129, 1), rgba(192, 131, 41, 1), rgba(244, 232, 217, 1), rgba(237, 208, 137, 1));
-	border-image-slice: 1;
-	border-style: solid;
-	border-width: 0px;
-	border-top-width: 3px;
+    border-image-slice: 1;
+    border-style: solid;
+    border-width: 0px;
+    border-top-width: 3px;
     background-color: rgba(0, 104, 55, 1);
     height: 50px;
-
 }
-
-
-
-
 
 .row {
-	margin-bottom: 0px;
+    margin-bottom: 0px;
 }
+
 .location {
     width: 200px;
-
 }
 
 #wheel {
-	
-/*	background-image: url("images/g-plaster.png");
-	background-repeat: repeat;
-	border-image: linear-gradient(to left, rgba(234, 190, 129, 1), rgba(192, 131, 41, 1), rgba(244, 232, 217, 1), rgba(237, 208, 137, 1));
-	border-image-slice: 1;
-	border-style: solid;
-	border-width: 0px;
-	border-right-width: 8px;*/
-	width: 250px;
-	margin: auto;
+    width: 250px;
+    margin: auto;
     padding: 20px;
 }
-.res-title{
-	font-size: 24pt;
-	font-style: bold;
+
+.res-title {
+    font-size: 24pt;
+    font-style: bold;
 }
-#Layer-1{
+
+#Layer-1 {
     width: 400px;
 }
+
 .svg {
     margin: auto;
     width: 100%;
@@ -112,16 +101,20 @@ body {
     z-index: 1;
     padding: 20px;
 }
-.material-icons{
+
+.material-icons {
     color: white;
 }
+
 .hidden {
     display: none;
 }
-.btn{
+
+.btn {
     margin: 10px;
     background-color: #D6B982;
 }
+
 .dropdown-content,
 .active {
     width: 150px;
@@ -129,18 +122,14 @@ body {
 }
 
 .input-field {
-    padding:
-    margin: auto;
+    padding: margin: auto;
 }
 
 label {
-	display: block;
-	padding-left: 15px;
-	text-indent: -15px;
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
 }
-
-
-
 
 .bodyContent {
     font-weight: bold;
