@@ -122,6 +122,7 @@ $(document).ready(function() {
         marker.addListener('click', toggleBounce);
 
 
+
         function toggleBounce() {
             if (marker.getAnimation() !== null) {
                 marker.setAnimation(null);
@@ -283,6 +284,8 @@ $(document).ready(function() {
                 });
 
 
+
+                // adding markers with zomato info 
                 var marker = new google.maps.Marker({
                     position: { lat: lati, lng: longi },
                     map: map,
@@ -312,6 +315,7 @@ $(document).ready(function() {
                     window.location.href='https://www.google.com/maps/dir/' + myLocation.latitude + "," + myLocation.longitude + "/" + venues[i].restaurant.location.address;   
                 })
 
+                // this is the function for the clear markers button aka reset
                 $("#hide").on("click", function() {
                     marker.setMap(null);
 
