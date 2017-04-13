@@ -1,13 +1,19 @@
-#container1 {
-    width: 100%;
+.container {
+    width: 100vw;
 }
 
 .brand-logo {
-	text-align: center;
+	
 	padding: 15px;
 	margin:auto;
 }
-
+.map-div{
+    height: 50vh;
+}
+.main-row{
+    background-image: url("images/roulette-bg.svg");
+    height: 100%;
+}
 #map {
     background-color: rgba(0, 104, 55, 1);
     border-style: solid;
@@ -20,8 +26,6 @@
 	margin: auto;
 	width: 100%;
     height: 50vh;
-
-
 }
 
 html,
@@ -38,16 +42,17 @@ body {
 }
 .nav-wrapper {
     height: 80px;
-    padding: 7px;
-    background-image: url("images/k13331662.png");
+    padding: 3px;
+/*    background-image: url("images/k13331662.png");
     background-repeat: repeat-x;
-    border-image: linear-gradient(to left, rgba(234, 190, 129, 1), rgba(192, 131, 41, 1), rgba(244, 232, 217, 1), rgba(237, 208, 137, 1));
+*/  border-image: linear-gradient(to left, rgba(234, 190, 129, 1), rgba(192, 131, 41, 1), rgba(244, 232, 217, 1), rgba(237, 208, 137, 1));
 	border-image-slice: 1;
 	border-style: solid;
 	border-width: 0px;
 	border-bottom-width: 3px;
     background-color: rgba(0, 104, 55, 1);
 }
+
 .icon{
 	width: 40px;
 }
@@ -78,7 +83,7 @@ body {
 }
 
 #wheel {
-	background: linear-gradient(to right,rgba(0,0,0, 0.7), rgba(183,183,183,0.1));
+	
 /*	background-image: url("images/g-plaster.png");
 	background-repeat: repeat;
 	border-image: linear-gradient(to left, rgba(234, 190, 129, 1), rgba(192, 131, 41, 1), rgba(244, 232, 217, 1), rgba(237, 208, 137, 1));
@@ -94,6 +99,9 @@ body {
 	font-size: 24pt;
 	font-style: bold;
 }
+#Layer-1{
+    width: 400px;
+}
 .svg {
     margin: auto;
     width: 100%;
@@ -104,11 +112,16 @@ body {
     z-index: 1;
     padding: 20px;
 }
-
+.material-icons{
+    color: white;
+}
 .hidden {
     display: none;
 }
-
+.btn{
+    margin: 10px;
+    background-color: #D6B982;
+}
 .dropdown-content,
 .active {
     width: 150px;

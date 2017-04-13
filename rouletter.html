@@ -13,48 +13,51 @@
 </head>
 
 <body>
-    <div class="container" id="container1">
-        <div class="nav-wrapper">
-            <!-- roulette logo -->
-            <a href="#" class="brand-logo"><img src="assets/images/rouletter-logo.svg"></a>
-            <ul class="right">
-                <li>
+    
+        <nav>
+            <div class="nav-wrapper">
+                <!-- roulette logo -->
+                <a href="#" class="brand-logo left"><img src="assets/images/rouletter-logo.svg"></a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a class="dropdown-button btn" href="#" data-activates='dropdown1'>Cuisine</a>
+                        
+                        <ul id="dropdown1" class="dropdown-content">
+                            <div class="cuisine-cats">
+                                <!-- this div should be populated by categories returned from an api call to zomato for the proper matching ids -->
+                            </div>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-light btn" id="nav"><i class="material-icons left">navigation</i>Directions</a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-light btn" id="hide">Reset</a>
+                    </li>
                     <!-- zip code box -->
-                    <div class="input-field location">
+                    <!--       <div class="input-field location">
                         <input type="search" placeholder="Town or Zip Code">
                     </div>
-                </li>
-                <!-- google sign in -->
-                <!--  <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-                <button id="nav"<a class="waves-effect waves-light btn"><i class="material-icons left">navigation</i>directions</a></button>
-                <li><a class="dropdown-button btn" href="#" data-activates='dropdown1'>Cuisine</a>
-                    <ul id="dropdown1" class="dropdown-content">
-                        <div class="cuisine-cats">
-                            <!-- this div should be populated by categories returned from an api call to zomato for the proper matching ids -->
-                        </div>
-                    </ul>
-                </li>
-            </ul>
+                </li> -->
+                    <!-- google sign in -->
+                    <!--  <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+                </ul>
+            </div>
+        </nav>
+        <div class="row main-row">
+            <div class="col s6" id="wheel">
+                <!-- <div class="col s12"> -->
+                <a class="svg-container spin"></a>
+                <!--  <a class="waves-effect waves-light btn-large spin">Spin</a> -->
+                <!-- </div> -->
+            </div>
         </div>
-    </div>
-    <div class="row">
-
-        <div class="col s4" id="wheel">
-            <!-- <div class="col s12"> -->
-            <a class="svg-container spin"></a>
-            <!--  <a class="waves-effect waves-light btn-large spin">Spin</a> -->
-            <!-- </div> -->
-
+            
+            <div class="col s12 map-div">
+                <div id="map"></div>
+           
         </div>
-    </div>
-    <div class="row">
-    	<div class="col s2">
-    		<input class="button" id="hide" type=button value="Delete Markers">
-    	</div>
-    </div>
-  
-
-    <div id="map"></div>
+   
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
     <!-- JQuery -->
@@ -72,7 +75,7 @@
 <div class="svg hidden">
     <?xml version="1.0" encoding="utf-8"?>
     <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px" height="200px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="250px" height="250px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
         <path d="M199.443,99.812c0,0.119,0,0.238,0,0.357c0,10.681-1.686,20.966-4.815,30.618h-0.021l-94.251-30.618l1.031-0.337h97.344
     L199.443,99.812z" />
         <path fill="#FF0000" d="M199.443,99.812l-0.713,0.02h-97.344l93.221-30.281h0.021C197.721,79.083,199.404,89.249,199.443,99.812z" />
