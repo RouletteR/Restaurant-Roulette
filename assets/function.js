@@ -123,9 +123,6 @@ $(document).ready(function() {
 
 
 
-
-
-
         function toggleBounce() {
             if (marker.getAnimation() !== null) {
                 marker.setAnimation(null);
@@ -161,10 +158,9 @@ $(document).ready(function() {
 
     //Spin Wheel
     $(".spin").on("click", function() {
-        var rotation = Math.floor(Math.random() * (1440 - 360) + 360);
-        $("#Layer_1").velocity({ rotateZ: rotation }, { duration: 3000, easing: "linear", loop: false })
-            //$("#Layer_1").velocity({ opacity: 0 }, { display: "none" }, {duration: 10000, easing: "linear"});
-            .velocity({ rotateY: ["-180deg", 0] }, { duration: 3000, loop: 0.5 });
+        
+        $("#Layer_1").velocity({ rotateZ: [360, 0] }, { duration: 2500, easing: "linear", loop: false })
+            .velocity({ rotateY: ["-360deg", 0] }, { duration: 500, easing: "exponential", loop: 0.5 });
     });
 
     function initialize() {
