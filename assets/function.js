@@ -313,7 +313,7 @@ $(document).ready(function() {
                     map.panTo(marker.getPosition());
                 }
 
-                $("button#nav").on("click", function() {
+                $("#nav").on("click", function() {
                     window.location.href='https://www.google.com/maps/dir/' + myLocation.latitude + "," + myLocation.longitude + "/" + venues[i].restaurant.location.address;   
                 })
 
